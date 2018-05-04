@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'XLinkSDK'
-  s.version          = '5.0.0.37253'
+  s.version          = '6.1.2.33'
   s.summary          = 'XLink crop Iot SDK for iOS.'
   s.description      = <<-DESC
     XLink crop Iot SDK for iOS.more info can view in www.xlink.cn.
