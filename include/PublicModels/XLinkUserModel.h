@@ -14,27 +14,27 @@
 /**
  用户ID
  */
-@property (copy, nonatomic) NSNumber *user_id;
+@property(copy, nonatomic) NSNumber *user_id;
 
 /**
  调用凭证
  */
-@property (copy, nonatomic) NSString *access_token;
+@property(copy, nonatomic) NSString *access_token;
 
 /**
  刷新凭证
  */
-@property (copy, nonatomic) NSString *refresh_token;
+@property(copy, nonatomic) NSString *refresh_token;
 
 /**
  有效期（秒）
  */
-@property (copy, nonatomic) NSNumber *expire_in;
+@property(copy, nonatomic) NSNumber *expire_in;
 
 /**
  用户认证码
  */
-@property (copy, nonatomic) NSString *authorize;
+@property(copy, nonatomic) NSString *authorize;
 
 
 /**

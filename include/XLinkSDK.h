@@ -20,27 +20,29 @@
 
 #pragma mark 设置云端回调
 //和cloud服务器连接状态
-typedef NS_ENUM(NSUInteger,CloudConnectionState)  {
+typedef NS_ENUM(NSUInteger, CloudConnectionState) {
     CloudConnectionStateConnectFail = 0,//连接失败
     CloudConnectionStateConnectConnecting = 1,//连接中
     CloudConnectionStateConnectSuccess = 2,//连接成功
 };
 
-typedef NS_ENUM(NSUInteger,XDeviceEvent)  {
+typedef NS_ENUM(NSUInteger, XDeviceEvent) {
     XDeviceEventUnSubscribe = 0,//订阅关系取消
     XDeviceEventSubscribe = 1,//订阅关系建立
     XDeviceEventInfoChanged = 2,//设备基本属性变化
     XDeviceEventPropertyChanged = 3,//设备基本属性变化
 };
 
-typedef NS_ENUM(NSUInteger,LogoutReason)  {
+typedef NS_ENUM(NSUInteger, LogoutReason) {
     LogoutReasonUserLogout = 0,//用户主动退出
-    LogoutReasonSingleSignKickOff= 1,//单点登录。当前用户被踢出
+    LogoutReasonSingleSignKickOff = 1,//单点登录。当前用户被踢出
     LogoutReasonTokenExpired = 2,//用户凭证过期
+    LogoutReasonUserAuthInfoInvaild = 3,//用户授权信息不正确
 };
 
 
 #pragma mark - 云端回调
+
 @protocol XLinkCloudDelegate <NSObject>
 
 @optional
@@ -61,6 +63,7 @@ typedef NS_ENUM(NSUInteger,LogoutReason)  {
 @end
 
 #pragma mark - 用户授权结果回调
+
 @protocol XLinkUserDelegate <NSObject>
 
 @optional
@@ -76,6 +79,7 @@ typedef NS_ENUM(NSUInteger,LogoutReason)  {
 @end
 
 #pragma mark - 数据回调
+
 @protocol XLinkDataDelegate <NSObject>
 
 @optional
@@ -86,13 +90,14 @@ typedef NS_ENUM(NSUInteger,LogoutReason)  {
  *  @param xDevice 接收到数据的设备
  *  @param list    数据端点列表
  */
-- (void)onDataPointUpdateWithDevice:(XDevice *)xDevice withList:(NSArray <XLinkDataPoint *>*)list;
+- (void)onDataPointUpdateWithDevice:(XDevice *)xDevice withList:(NSArray <XLinkDataPoint *> *)list;
 
 @end
 
 
 #pragma mark - 设备状态回调
-@protocol  XLinkDeviceStateDelegate <NSObject>
+
+@protocol XLinkDeviceStateDelegate <NSObject>
 
 @optional
 /**
@@ -116,45 +121,45 @@ typedef NS_ENUM(NSUInteger,LogoutReason)  {
 @interface XLinkSDK : NSObject
 
 /**
- SDK云端回调
+ SDK云端连接状态回调
  */
-@property (weak, nonatomic)id<XLinkCloudDelegate> cloudDelegate;
+@property(weak, nonatomic) id <XLinkCloudDelegate> cloudDelegate;
 /**
  SDK用户授权相关回调
  */
-@property (weak, nonatomic)id<XLinkUserDelegate> userDelegate;
+@property(weak, nonatomic) id <XLinkUserDelegate> userDelegate;
 /**
  SDK数据相关的delegate，包括接收到dataPoint的更新
  */
-@property (weak, nonatomic)id<XLinkDataDelegate> dataDelegate;
+@property(weak, nonatomic) id <XLinkDataDelegate> dataDelegate;
 /**
  SDK设备状态相关的delegate，包括设备在线离线状态和设备属性的变化
  */
-@property (weak, nonatomic)id< XLinkDeviceStateDelegate> deviceStateDelegate;
+@property(weak, nonatomic) id <XLinkDeviceStateDelegate> deviceStateDelegate;
 /**
  SDK全局的配置
  */
-@property (strong, nonatomic) XLinkConfig *xlinkConfig;
+@property(strong, nonatomic) XLinkConfig *xlinkConfig;
 /**
  SDK的dataPoint管理类
  */
-@property (strong, nonatomic) XLinkDataPointManager *dataPointManager;
+@property(strong, nonatomic) XLinkDataPointManager *dataPointManager;
 /**
  SDK的设备管理类
  */
-@property (strong, nonatomic) XDeviceManager *deviceManager;
+@property(strong, nonatomic) XDeviceManager *deviceManager;
 /**
  SDK的云端登陆状态
  */
-@property (assign, nonatomic) CloudConnectionState cloudState;
+@property(assign, nonatomic) CloudConnectionState cloudState;
 /**
  当前登陆的用户
  */
-@property (strong, nonatomic) XLinkUserModel *userModel;
+@property(strong, nonatomic) XLinkUserModel *userModel;
 /**
  用于判断sdk是否已经启动
  */
-@property (assign, nonatomic,getter = isStarted) BOOL started;
+@property(assign, nonatomic, getter = isStarted) BOOL started;
 
 /**
  SDK单例
@@ -192,7 +197,15 @@ typedef NS_ENUM(NSUInteger,LogoutReason)  {
  */
 - (void)disconnectLocalWithDevice:(XDevice *)device;
 
+/**
+ 获取SDK版本号
+ 
+ @return SDK版本号
+ */
++ (NSString *)getXLinkSDKVersion;
+
 #pragma mark - task api
+
 /**
  开始一个任务
  

@@ -19,7 +19,6 @@
  */
 + (instancetype)shareManager;
 
-
 /**
  停止管理，清除所有缓存
  */
@@ -28,7 +27,7 @@
 /**
  所有的监听类对象
  */
-@property (strong, nonatomic,readonly) NSMutableArray <XLinkDataPointObserver *>*observerArray;
+@property(strong, nonatomic, readonly) NSMutableArray <XLinkDataPointObserver *> *observerArray;
 
 /**
  添加一个dataPoint的监听
@@ -50,6 +49,6 @@
  @param device 设备
  @param block 完成后的回调
  */
-- (void)getDataPointSourceWithDevice:(XDevice *)device withFinishBlock:(void(^)(NSArray <XLinkDataPoint *>*))block;
+- (void)getDataPointSourceWithDevice:(XDevice *)device withFinishBlock:(void (^)(NSArray <XLinkDataPoint *> *))block;
 
 @end

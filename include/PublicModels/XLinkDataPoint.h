@@ -11,7 +11,7 @@
 /**
  数据端点值数据类型
  */
-typedef NS_ENUM(NSUInteger, XLinkDataType) {
+typedef NS_ENUM(uint8_t, XLinkDataType) {
     XLinkDataTypeBool = 1,//布尔类型
     XLinkDataTypeByte = 2,//单字节(无符号)
     XLinkDataTypeShort = 3,//16位短整型（有符号）
@@ -25,39 +25,43 @@ typedef NS_ENUM(NSUInteger, XLinkDataType) {
 
 @interface XLinkDataPoint : NSObject
 
-
 /**
  数据端点值数据类型
  */
-@property (assign, nonatomic) XLinkDataType   type;
+@property(assign, nonatomic) XLinkDataType type;
+
 /**
  数据端点index
  */
-@property (assign, nonatomic) uint8_t   index;
+@property(assign, nonatomic) uint8_t index;
+
 /**
  数据端点的值
+ 如果type是XLinkDataTypeBool、XLinkDataTypeByte、XLinkDataTypeShort、XLinkDataTypeInt、XLinkDataTypeFloat、XLinkDataTypeUnsignedShort、XLinkDataTypeUnsignedInt，那么value应该是NSNumber类型；
+ 如果type是XLinkDataTypeString，那么value应该是NSString类型；
+ 如果type是XLinkDataTypeByteArray，那么value应该是NSData类型；
  */
-@property (strong, nonatomic) id        value;
+@property(strong, nonatomic) id value;
+
 /**
  数据端点的长度
  */
-@property (assign, nonatomic) uint16_t  len;
+@property(assign, nonatomic) uint16_t len;
+
 /**
  数据端点最大值
  */
-@property (assign, nonatomic) long long maxValue;
+@property(assign, nonatomic) long long maxValue;
+
 /**
  数据端点最小值
  */
-@property (assign, nonatomic) long long minValue;
+@property(assign, nonatomic) long long minValue;
+
 /**
  数据端点名称
  */
-@property (copy, nonatomic) NSString *name;
+@property(copy, nonatomic) NSString *name;
 
-- (void)setValueData:(NSData *)data;
-- (NSData *)getDataPointData;
-
-+ (uint8_t)getSevTypeFromDevType:(uint8_t)type;
 
 @end

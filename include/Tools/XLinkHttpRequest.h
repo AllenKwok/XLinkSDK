@@ -8,30 +8,31 @@
 
 #import <Foundation/Foundation.h>
 
-#define RequestTypeGet  @"GET"
-#define RequestTypePUT  @"PUT"
-#define RequestTypePOST @"POST"
-#define RequestTypeDelete @"DELETE"
 
-typedef void (^RequestCompleteBlock) (id result, NSError *err);
+FOUNDATION_EXTERN NSString * const RequestTypeGET;
+FOUNDATION_EXTERN NSString * const RequestTypePUT;
+FOUNDATION_EXTERN NSString * const RequestTypePOST;
+FOUNDATION_EXTERN NSString * const RequestTypeDELETE;
 
-typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
+typedef void (^RequestCompletionHandler)(id result, NSError *err);
+
+typedef NS_ENUM(NSUInteger, ThirdAccountSource) {
     ThirdAccountSourceWeChat = 4,
     ThirdAccountSourceQQ = 5,
     ThirdAccountSourceWeibo = 6,
     ThirdAccountSourceOther = 10
-} ;
+};
 
 @interface DeviceObject : NSObject
 
-@property (copy, nonatomic) NSString *product_id;
-@property (copy, nonatomic) NSString *mac;
-@property (copy, nonatomic) NSString *name;
-@property (copy, nonatomic) NSNumber *access_key;
-@property (copy, nonatomic) NSString *mcu_mod;
-@property (copy, nonatomic) NSString *mcu_version;
-@property (copy, nonatomic) NSString *firmware_mod;
-@property (copy, nonatomic) NSString *firmware_version;
+@property(copy, nonatomic) NSString *product_id;
+@property(copy, nonatomic) NSString *mac;
+@property(copy, nonatomic) NSString *name;
+@property(copy, nonatomic) NSNumber *access_key;
+@property(copy, nonatomic) NSString *mcu_mod;
+@property(copy, nonatomic) NSString *mcu_version;
+@property(copy, nonatomic) NSString *firmware_mod;
+@property(copy, nonatomic) NSString *firmware_version;
 
 - (instancetype)initWithProductID:(NSString *)product_id withMac:(NSString *)mac withAccessKey:(NSNumber *)accessKey;
 
@@ -60,58 +61,62 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *
  *  @param phone   手机号码
  *  @param captcha 图片验证码
- *  @param block   完成后的回调
+ *  @param completionHandler   完成后的回调
  */
-+ (void)getVerifyCodeWithPhone:(NSString *)phone withCaptcha:(NSString *)captcha didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getVerifyCodeWithDomainAddress:(NSString *)address withCropId:(NSString *)cropId withPhone:(NSString *)phone withCaptcha:(NSString *)captcha didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  请求或刷新发送注册短信的图片验证码
  *  当请求发送注册手机验证码达到一定的次数后，需要进行图片验证码进行验证，本接口用于获取图片验证码。
  *
  *  @param phone 手机号
- *  @param block 完成后的回调
+ *  @param completionHandler 完成后的回调
  */
-+ (void)getCaptchaWithPhone:(NSString *)phone didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getCaptchaWithDomainAddress:(NSString *)address withCropId:(NSString *)cropId withPhone:(NSString *)phone didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  注册账号
  *
+ *  @param address API服务器地址
+ *  @param corpId     企业id
  *  @param account    账号：手机号码/邮箱地址
  *  @param nickname   昵称
  *  @param verifyCode 验证码（邮箱注册不需要验证码）
  *  @param pwd        密码
- *  @param block      完成后的回调
+ *  @param completionHandler      完成后的回调
  */
-+ (void)registerWithAccount:(NSString *)account withNickname:(NSString *)nickname withVerifyCode:(NSString *)verifyCode withPassword:(NSString *)pwd didLoadData:(RequestCompleteBlock)block;
++ (instancetype)registerWithDomainAddress:(NSString *)address withCropId:(NSString *)corpId withAccount:(NSString *)account withNickname:(NSString *)nickname withVerifyCode:(NSString *)verifyCode withPassword:(NSString *)pwd didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  注册邮箱
-
+ 
+ @param address API服务器地址
+ @param corpId 企业id
  @param eamil 邮箱
  @param nickname 昵称
  @param pwd 认证密码
  @param localLan 本地语言代码
- @param block 完成后的回调
+ @param completionHandler 完成后的回调
  */
-+ (void)registerWithEmail:(NSString *)eamil withNickname:(NSString *)nickname withPassword:(NSString *)pwd withLocalLang:(NSString *)localLan didLoadData:(RequestCompleteBlock)block;
++ (instancetype)registerEmailWithDomainAddress:(NSString *)address withCropId:(NSString *)corpId withEmail:(NSString *)eamil withNickname:(NSString *)nickname withPassword:(NSString *)pwd withLocalLang:(NSString *)localLan didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  用户认证(登录)
  *
  *  @param account 账号 : 手机号码/邮箱地址
  *  @param pwd     密码
- *  @param block   完成后的回调
+ *  @param completionHandler   完成后的回调
  */
-+ (void)authWithAccount:(NSString *)account withPassword:(NSString *)pwd didLoadData:(RequestCompleteBlock)block;
++ (instancetype)authWithAccount:(NSString *)account withPassword:(NSString *)pwd didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
  刷新凭证
-
+ 
  @param refreshToken 刷新凭证
- @param block 完成后的回调
+ @param completionHandler 完成后的回调
  */
-+ (void)refreshAccessTokenWithRefreshToken:(NSString *)refreshToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)refreshAccessTokenWithRefreshToken:(NSString *)refreshToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  修改账号昵称
@@ -120,7 +125,25 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param userID      用户ID
  *  @param accessToken 调用凭证
  */
-+ (void)modifyAccountNickname:(NSString *)nickname withUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)modifyAccountNickname:(NSString *)nickname withUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
+
+/**
+ 修改用户基本信息
+
+ @param userID 用户ID
+ @param nickName 用户昵称，可以为空
+ @param remark 备注，可以为空
+ @param tags 标签数组，["标签1","标签2"]，可以为空
+ @param avatar 用户头像url，可以为空
+ @param country 用户所在国家，可以为空
+ @param province 用户所在省份，可以为空
+ @param city 用户所在城市，可以为空
+ @param gender 用户性别, 1为男, 2为女, -1为未知，可以为空
+ @param age 年龄，可以为空
+ @param accessToken 调用凭证
+ @param block 完成后的回调
+ */
++ (instancetype)modifyUserBaseInfowithUserID:(NSNumber *)userID nikeName:(NSString *)nickName remark:(NSString *)remark tags:(NSArray <NSString *> *)tags avatar:(NSString *)avatar country:(NSString *)country province:(NSString *)province city:(NSString *)city gender:(NSString *)gender age:(NSString *)age  accessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)block;
 
 /**
  *  重置密码
@@ -128,29 +151,29 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param oldPwd      旧密码
  *  @param newPwd      新密码
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)resetPasswordWithOldPassword:(NSString *)oldPwd withNewPassword:(NSString *)newPwd withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)resetPasswordWithOldPassword:(NSString *)oldPwd withNewPassword:(NSString *)newPwd withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  忘记密码(获取重置密码的验证码)
  *
  *  @param account     忘记密码的账号
  *  @param captcha     图形验证码，非必填
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)forgotPasswordWithAccount:(NSString *)account withCaptcha:(NSString *)captcha didLoadData:(RequestCompleteBlock)block;
++ (instancetype)forgotPasswordWithDomainAddress:(NSString *)address withCropId:(NSString *)cropId withAccount:(NSString *)account withCaptcha:(NSString *)captcha didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
  忘记密码
-
+ 
  @param email 邮箱
  @param captcha 图形验证码，非必填
  @param localLang 邮件语言选择
- @param block 完成后的回调
+ @param completionHandler 完成后的回调
  */
-+ (void)forgotPasswordWithEmail:(NSString *)email withCaptcha:(NSString *)captcha withLocalLang:(NSString *)localLang didLoadData:(RequestCompleteBlock)block;
++ (instancetype)forgotPasswordWithEmail:(NSString *)email withCaptcha:(NSString *)captcha withLocalLang:(NSString *)localLang didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  找回密码(根据获取到的验证码设置新密码)
@@ -158,9 +181,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param account     要找回密码的账号
  *  @param verifyCode  验证码
  *  @param pwd         要设置的新密码
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)foundBackPasswordWithAccount:(NSString *)account withVerifyCode:(NSString *)verifyCode withNewPassword:(NSString *)pwd didLoadData:(RequestCompleteBlock)block;
++ (instancetype)foundBackPasswordWithAccount:(NSString *)account withVerifyCode:(NSString *)verifyCode withNewPassword:(NSString *)pwd didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  14、设置用户扩展属性
@@ -168,18 +191,18 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  @param dic 扩展属性
  @param userID 用户ID
  @param accessToken 调用凭证
- @param block 完成后回调
+ @param completionHandler 完成后回调
  */
-+ (void)setUserPropertyDictionary:(NSDictionary *)dic withUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)setUserPropertyDictionary:(NSDictionary *)dic withUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  15、获取用户扩展属性
  *
  *  @param userID      用户ID
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)getUserPropertyWithUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getUserPropertyWithUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  16、修改用户扩展属性
@@ -187,9 +210,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param dic         扩展属性字典
  *  @param userID      用户ID
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)modifyUserPropertyDictionary:(NSDictionary *)dic withUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)modifyUserPropertyDictionary:(NSDictionary *)dic withUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  17、获取用户单个扩展属性
@@ -197,9 +220,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param userID      用户ID
  *  @param key         属性Key值
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)getUserSinglePropertyWithUserID:(NSNumber *)userID withPropertyKey:(NSString *)key withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getUserSinglePropertyWithUserID:(NSNumber *)userID withPropertyKey:(NSString *)key withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  18、删除用户扩展属性
@@ -207,9 +230,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param userID      用户ID
  *  @param key         属性Key值
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)delUserPropertyWithUserID:(NSNumber *)userID withPropertyKey:(NSString *)key withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)delUserPropertyWithUserID:(NSNumber *)userID withPropertyKey:(NSString *)key withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
@@ -218,18 +241,18 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param accessToken 调用凭证
  *  @param userId      用户id
  *  @param account     手机号码
- *  @param block       完成后回调
+ *  @param completionHandler       完成后回调
  */
-+ (void)requestSendVerifyCodeWithAccessToken:(NSString *)accessToken WithUserId:(NSNumber *)userId withAccount:(NSString *)account didLoadData:(RequestCompleteBlock)block;
++ (instancetype)requestSendVerifyCodeWithAccessToken:(NSString *)accessToken WithUserId:(NSNumber *)userId withAccount:(NSString *)account didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
  请求或刷新请求密码找回所需的图片验证码
  
  @param phone 手机号码
- @param block 完成后回调
+ @param completionHandler 完成后回调
  */
-+ (void)getForgotPasswordCaptchaWithPhone:(NSString *)phone didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getForgotPasswordCaptchaWithPhone:(NSString *)phone didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  通过验证码修改 修改邮箱/手机号码
@@ -238,35 +261,35 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param userId      用户id
  *  @param account     邮箱/手机号码
  *  @param verifycode  验证码
- *  @param block       完成后回调
+ *  @param completionHandler       完成后回调
  */
-+ (void)modifyAccountWithAccessToken:(NSString *)accessToken WithUserId:(NSNumber *)userId withAccount:(NSString *)account withPassword:(NSString *)password withVerifyCode:(NSString *)verifycode didLoadData:(RequestCompleteBlock)block;
++ (instancetype)modifyAccountWithAccessToken:(NSString *)accessToken WithUserId:(NSNumber *)userId withAccount:(NSString *)account withPassword:(NSString *)password withVerifyCode:(NSString *)verifycode didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  获取用户详细信息
  *
  *  @param userID      用户id
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)getUserInfoWithUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getUserInfoWithUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  获取用户公开信息
  *
  *  @param userID      用户id
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)getUserOpenInfoWithUserID:(NSNumber *)userID didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getUserOpenInfoWithUserID:(NSNumber *)userID didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  上传用户头像
  *
  *  @param accessToken 调用凭证
  *  @param imageData   头像图片的二进制数据
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)uploadAvatarWithAccessToken:(NSString *)accessToken withImageData:(NSData *)imageData didLoadData:(RequestCompleteBlock)block;
++ (instancetype)uploadAvatarWithAccessToken:(NSString *)accessToken withImageData:(NSData *)imageData didLoadData:(RequestCompletionHandler)completionHandler;
 
 #pragma mark - 第三方账号
 
@@ -280,9 +303,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  @param verifycode 验证码
  @param password 密码
  @param nickname 昵称       可选
- @param block 完成后的回调
+ @param completionHandler 完成后的回调
  */
-+ (void)initPasswordAndBindPhoneWithAccessToken:(NSString *)accessToken withUserId:(NSNumber *)userId withPhone:(NSString *)phone withPhone_Zone:(NSString *)zone withVerifyCode:(NSString *)verifycode withPassword:(NSString *)password withNickname:(NSString *)nickname didLoadData:(RequestCompleteBlock)block;
++ (instancetype)initPasswordAndBindPhoneWithAccessToken:(NSString *)accessToken withUserId:(NSNumber *)userId withPhone:(NSString *)phone withPhone_Zone:(NSString *)zone withVerifyCode:(NSString *)verifycode withPassword:(NSString *)password withNickname:(NSString *)nickname didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  第三方用户登录云智易接口
@@ -291,9 +314,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param open_id 	第三方用户开放ID
  *  @param token   第三方用户Token
  *  @param name    第三方用户昵称，可选
- *  @param block   完成后的回调
+ *  @param completionHandler   完成后的回调
  */
-+ (void)authFromThirdWithSource:(NSNumber *)type open_id:(NSString *)open_id token:(NSString *)token name:(NSString *)name didLoadData:(RequestCompleteBlock)block;
++ (instancetype)authFromThirdWithSource:(NSNumber *)type open_id:(NSString *)open_id token:(NSString *)token name:(NSString *)name didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  第三方用户初始化登录密码
@@ -301,9 +324,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param userId      用户id
  *  @param password    密码
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+(void)thirdSourceAccountInitPasswordWithUserid:(NSNumber *)userId withPassword:(NSString *)password withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)thirdSourceAccountInitPasswordWithUserid:(NSNumber *)userId withPassword:(NSString *)password withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  绑定第三方账号
@@ -315,9 +338,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param openId           第三方帐号OpenID
  *  @param thirdAccessToken 第三方平台返回凭证
  *  @param source           第三方来源
- *  @param block            完成后的回调
+ *  @param completionHandler            完成后的回调
  */
-+ (void)bindThirdAccountWithUserId:(NSNumber *)userId withAccessToken:(NSString *)accessToken withOpenId:(NSString *)openId withThirdAccountAccessToken:(NSString *)thirdAccessToken withSource:(ThirdAccountSource)source didLoadData:(RequestCompleteBlock)block;
++ (instancetype)bindThirdAccountWithUserId:(NSNumber *)userId withAccessToken:(NSString *)accessToken withOpenId:(NSString *)openId withThirdAccountAccessToken:(NSString *)thirdAccessToken withSource:(ThirdAccountSource)source didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
@@ -326,18 +349,19 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param userId      用户id
  *  @param accessToken 调用凭证
  *  @param source      第三方来源
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)unbindThirdAccountWithUserId:(NSNumber *)userId withAccessToken:(NSString *)accessToken withSource:(ThirdAccountSource)source didLoadData:(RequestCompleteBlock)block;
++ (instancetype)unbindThirdAccountWithUserId:(NSNumber *)userId withAccessToken:(NSString *)accessToken withSource:(ThirdAccountSource)source didLoadData:(RequestCompletionHandler)completionHandler;
 
 #pragma mark-第三方登录（用于海外的平台，Facebook和Twitter）
+
 /**
  第三方登录
  
  @param content 请求内容
- @param block 完成后的回调
+ @param completionHandler 完成后的回调
  */
-+(void)authFromThirdForeignWithContent:(NSMutableDictionary *)content didLoadData:(RequestCompleteBlock)block;
++ (instancetype)authFromThirdForeignWithContent:(NSDictionary *)content didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  绑定国外的第三方帐号
@@ -345,9 +369,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  @param userId 用户id
  @param accessToken 调用凭证
  @param content 请求内容
- @param block 完成后的回调
+ @param completionHandler 完成后的回调
  */
-+ (void)bindThirdAccountWithUserId:(NSNumber *)userId withAccessToken:(NSString *)accessToken withContent:(NSMutableDictionary *)content didLoadData:(RequestCompleteBlock)block;
++ (instancetype)bindThirdAccountWithUserId:(NSNumber *)userId withAccessToken:(NSString *)accessToken withContent:(NSMutableDictionary *)content didLoadData:(RequestCompletionHandler)completionHandler;
 
 #pragma mark - 设备操作
 
@@ -357,9 +381,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param userID      用户ID
  *  @param accessToken 调用凭证
  *  @param deviceID    设备ID
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)delDeviceWithUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken withDeviceID:(NSNumber *)deviceID didLoadData:(RequestCompleteBlock)block;
++ (instancetype)delDeviceWithUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken withDeviceID:(NSNumber *)deviceID didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  9、取消订阅
@@ -367,9 +391,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param userID      用户ID
  *  @param accessToken 调用凭证
  *  @param deviceID    设备ID
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)unsubscribeDeviceWithUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken withDeviceID:(NSNumber *)deviceID didLoadData:(RequestCompleteBlock)block;
++ (instancetype)unsubscribeDeviceWithUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken withDeviceID:(NSNumber *)deviceID didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
@@ -379,9 +403,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param deviceID    设备ID
  *  @param productID   设备的产品ID
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)setDevicePropertyDictionary:(NSDictionary *)dic withDeviceID:(NSNumber *)deviceID withProductID:(NSString *)productID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)setDevicePropertyDictionary:(NSDictionary *)dic withDeviceID:(NSNumber *)deviceID withProductID:(NSString *)productID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  8、获取设备扩展属性
@@ -389,9 +413,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param deviceID    设备ID
  *  @param productID   设备的产品ID
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)getDevicePropertyWithDeviceID:(NSNumber *)deviceID withProductID:(NSString *)productID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getDevicePropertyWithDeviceID:(NSNumber *)deviceID withProductID:(NSString *)productID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  9、修改设备扩展属性
@@ -400,9 +424,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param deviceID    设备ID
  *  @param productID   设备的产品ID
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)modifyDevicePropertyDictionary:(NSDictionary *)dic withDeviceID:(NSNumber *)deviceID withProductID:(NSString *)productID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)modifyDevicePropertyDictionary:(NSDictionary *)dic withDeviceID:(NSNumber *)deviceID withProductID:(NSString *)productID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  修改设备
@@ -411,9 +435,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param deviceID    设备ID
  *  @param productID   设备的产品ID
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)modifyDeviceNameWithName:(NSString *)deviceName withDeviceID:(NSNumber *)deviceID withProductID:(NSString *)productID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)modifyDeviceNameWithName:(NSString *)deviceName withDeviceID:(NSNumber *)deviceID withProductID:(NSString *)productID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
@@ -422,20 +446,20 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param userID       用户ID
  *  @param accessToken  调用凭证
  *  @param deviceObject 要注册的设备
- *  @param block        完成后的回调
+ *  @param completionHandler        完成后的回调
  */
-+ (void)registerDeviceWithUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken withDevice:(DeviceObject *)deviceObject didLoadData:(RequestCompleteBlock)block;
++ (instancetype)registerDeviceWithUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken withDevice:(DeviceObject *)deviceObject didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
  通过二维码订阅设备
-
+ 
  @param user_id 用户id
  @param access_token 调用凭证
  @param qr_code 二维码字符串
- @param block 完成后的回调
+ @param completionHandler 完成后的回调
  */
-+ (void)subscribeDeviceWithUserID:(NSNumber *)user_id accessToken:(NSString *)access_token QRCode:(NSString *)qr_code didLoadData:(RequestCompleteBlock)block;
++ (instancetype)subscribeDeviceWithUserID:(NSNumber *)user_id accessToken:(NSString *)access_token QRCode:(NSString *)qr_code didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  获取单个设备详细信息
@@ -443,9 +467,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param productID  设备的产品ID
  *  @param deviceID    设备ID
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)getDeviceInfoWithDeviceID:(NSNumber *)deviceID withProductID:(NSString *)productID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getDeviceInfoWithDeviceID:(NSNumber *)deviceID withProductID:(NSString *)productID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
@@ -454,19 +478,19 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param userID      用户ID
  *  @param accessToken 调用凭证
  */
-+ (void)getDeviceListWithUserID:(NSNumber *)userID withVersion:(uint16_t)version withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getDeviceListWithUserID:(NSNumber *)userID withVersion:(uint16_t)version withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
  获取设备列表
-
+ 
  @param userID 用户ID
  @param version 版本号
  @param filter 过滤字段，以逗号分隔
  @param accessToken 调用凭证
- @param block 完成后回调
+ @param completionHandler 完成后回调
  */
-+ (void)getDeviceListWithUserID:(NSNumber *)userID withVersion:(uint16_t)version withFilter:(NSString *)filter withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getDeviceListWithUserID:(NSNumber *)userID withVersion:(uint16_t)version withFilter:(NSString *)filter withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  获取设备列表
@@ -474,9 +498,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param userID      用户ID
  *  @param accessToken 调用凭证
  *  @param version     当前列表的版本号，根据当前版本号判定列表有无更改。
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)getDeviceListWithUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken withVersion:(NSNumber *)version didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getDeviceListWithUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken withVersion:(NSNumber *)version didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
@@ -484,9 +508,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *
  *  @param dic         属性字典
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)setDevicePropertyDictionary:(NSDictionary *)dic withProductID:(NSString *)product_id withDeviceID:(NSNumber *)deviceID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)setDevicePropertyDictionary:(NSDictionary *)dic withProductID:(NSString *)product_id withDeviceID:(NSNumber *)deviceID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
@@ -496,27 +520,27 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param product_id  productID
  *  @param deviceID    deviceID
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)delDevicePropertyKey:(NSString *)key withProductID:(NSString *)product_id withDeviceID:(NSNumber *)deviceID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)delDevicePropertyKey:(NSString *)key withProductID:(NSString *)product_id withDeviceID:(NSNumber *)deviceID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
  *  获取设备扩展属性
  *
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)getDevicePropertyWithProductID:(NSString *)product_id withDeviceID:(NSNumber *)deviceID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getDevicePropertyWithProductID:(NSString *)product_id withDeviceID:(NSNumber *)deviceID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  修改设备扩展属性
  *
  *  @param dic         属性字典
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)modifyDevicePropertyDictionary:(NSDictionary *)dic withProductID:(NSString *)product_id withDeviceID:(NSNumber *)deviceID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)modifyDevicePropertyDictionary:(NSDictionary *)dic withProductID:(NSString *)product_id withDeviceID:(NSNumber *)deviceID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  获取设备告警日志列表
@@ -525,19 +549,19 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param deviceID    设备id
  *  @param dic         查询条件
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)getDeviceAlertLogsWithProductID:(NSString *)product_id withDeviceID:(NSNumber *)deviceID withQueryDict:(NSDictionary *)dic withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getDeviceAlertLogsWithProductID:(NSString *)product_id withDeviceID:(NSNumber *)deviceID withQueryDict:(NSDictionary *)dic withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
  获取数据端点列表
-
+ 
  @param product_id 产品id
  @param accessToken 调用凭证
- @param block 完成后的回调
+ @param completionHandler 完成后的回调
  */
-+ (void)getDeviceDataPointsWithProductID:(NSString *)product_id  withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getDeviceDataPointsWithProductID:(NSString *)product_id withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  获取设备数据快照
@@ -546,9 +570,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param deviceID    设备id
  *  @param dic         查询条件
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)getDeviceSnapShotWithProductID:(NSString *)product_id withDeviceID:(NSNumber *)deviceID withQueryDict:(NSDictionary *)dic withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getDeviceSnapShotWithProductID:(NSString *)product_id withDeviceID:(NSNumber *)deviceID withQueryDict:(NSDictionary *)dic withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  分享设备
@@ -560,14 +584,14 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param expire      分享消息的有效时间
  *  @param authority   对设备的控制权限，R可读，W可写，RW可读可写；默认为null相当于RW；
  *  @param extend      扩展信息
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)shareDeviceWithDeviceID:(NSNumber *)deviceID withAccessToken:(NSString *)accessToken withShareUserAccount:(NSString *)account withMode:(NSString *)mode withExpire:(NSString *)expire withExtend:(NSString *)extend withAuthority:(NSString *)authority didLoadData:(RequestCompleteBlock)block;
++ (instancetype)shareDeviceWithDeviceID:(NSNumber *)deviceID withAccessToken:(NSString *)accessToken withShareUserAccount:(NSString *)account withMode:(NSString *)mode withExpire:(NSString *)expire withExtend:(NSString *)extend withAuthority:(NSString *)authority didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
  分享到给用户
-
+ 
  @param deviceID 设备id
  @param accessToken token
  @param account 被分享的用户的账号，可以是手机号，邮箱或者open_id
@@ -576,53 +600,53 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  @param expire      分享消息的有效时间
  @param authority   对设备的控制权限，R可读，W可写，RW可读可写；默认为null相当于RW；
  @param extend      扩展信息
- @param block       完成后的回调
+ @param completionHandler       完成后的回调
  */
-+ (void)shareDeviceWithDeviceID:(NSNumber *)deviceID withAccessToken:(NSString *)accessToken withShareUserAccount:(NSString *)account withSourceType:(int)sourceType withMode:(NSString *)mode withExpire:(NSString *)expire withExtend:(NSString *)extend withAuthority:(NSString *)authority didLoadData:(RequestCompleteBlock)block;
++ (instancetype)shareDeviceWithDeviceID:(NSNumber *)deviceID withAccessToken:(NSString *)accessToken withShareUserAccount:(NSString *)account withSourceType:(int)sourceType withMode:(NSString *)mode withExpire:(NSString *)expire withExtend:(NSString *)extend withAuthority:(NSString *)authority didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  取消分享
  *
  *  @param accessToken 调用凭证
  *  @param inviteCode  分享码
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)cancelShareDeviceWithAccessToken:(NSString *)accessToken withInviteCode:(NSString *)inviteCode didLoadData:(RequestCompleteBlock)block;
++ (instancetype)cancelShareDeviceWithAccessToken:(NSString *)accessToken withInviteCode:(NSString *)inviteCode didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  接受分享
  *
  *  @param inviteCode  分享码
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)acceptShareWithInviteCode:(NSString *)inviteCode withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)acceptShareWithInviteCode:(NSString *)inviteCode withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  拒绝分享
  *
  *  @param inviteCode  分享码
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)denyShareWithInviteCode:(NSString *)inviteCode withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)denyShareWithInviteCode:(NSString *)inviteCode withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  获取分享列表
  *
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)getShareListWithAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getShareListWithAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  管理员或用户删除这条分享记录
  *
  *  @param inviteCode  邀请码inviteCode
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)delShareRecordWithInviteCode:(NSString *)inviteCode WithAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)delShareRecordWithInviteCode:(NSString *)inviteCode WithAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
@@ -631,9 +655,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param accessToken 调用凭证
  *  @param product_id  产品id
  *  @param deviceID    设备id
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)delAllSubscribeWithAccessToken:(NSString *)accessToken withProductID:(NSString *)product_id withDeviceID:(NSNumber *)deviceID didLoadData:(RequestCompleteBlock)block;
++ (instancetype)delAllSubscribeWithAccessToken:(NSString *)accessToken withProductID:(NSString *)product_id withDeviceID:(NSNumber *)deviceID didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
@@ -642,9 +666,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param deviceID    需要查询的设备ID
  *  @param userID      用户ID
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)getUserListWithDeviceID:(NSNumber *)deviceID withUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getUserListWithDeviceID:(NSNumber *)deviceID withUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  订阅设备
@@ -653,9 +677,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param accessToken   调用凭证
  *  @param authorizeCode 设备认证码
  *  @param deviceID      设备ID
- *  @param block         完成后的回调
+ *  @param completionHandler         完成后的回调
  */
-+ (void)subscribeDeviceWithUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken withDeviceAuthorizeCode:(NSString *)authorizeCode withDeviceID:(NSNumber *)deviceID didLoadData:(RequestCompleteBlock)block;
++ (instancetype)subscribeDeviceWithUserID:(NSNumber *)userID withAccessToken:(NSString *)accessToken withDeviceAuthorizeCode:(NSString *)authorizeCode withDeviceID:(NSNumber *)deviceID didLoadData:(RequestCompletionHandler)completionHandler;
 
 #pragma mark - APNS
 
@@ -666,9 +690,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param accessToken accessToken
  *  @param AppId       用户在XLINK平台创建APP开发时，获取到的ID
  *  @param devicetoken iOS APP 运行时获取到的device_token
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)registerApnSeverWithUserId:(NSNumber *)userid withAccessToken:(NSString *)accessToken withAppId:(NSString *)AppId withDeviceToken:(NSString *)devicetoken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)registerApnSeverWithUserId:(NSNumber *)userid withAccessToken:(NSString *)accessToken withAppId:(NSString *)AppId withDeviceToken:(NSString *)devicetoken didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
@@ -677,9 +701,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param userid      用户id
  *  @param accessToken accessToken
  *  @param AppId       用户在XLINK平台创建APP开发时，获取到的ID
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)unregisterApnSeverWithUserId:(NSNumber *)userid withAccessToken:(NSString *)accessToken withAppId:(NSString *)AppId didLoadData:(RequestCompleteBlock)block;
++ (instancetype)unregisterApnSeverWithUserId:(NSNumber *)userid withAccessToken:(NSString *)accessToken withAppId:(NSString *)AppId didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
@@ -688,9 +712,9 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param device_id   设备ID
  *  @param product_id  PID
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)getVersionWithDeviceID:(NSString *)device_id withProduct_id:(NSString *)product_id withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)getVersionWithDeviceID:(NSString *)device_id withProduct_id:(NSString *)product_id withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
@@ -699,18 +723,18 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  *  @param device_id   设备ID
  *  @param product_id  PID
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)upgradeWithDeviceID:(NSString *)device_id withProduct_id:(NSString *)product_id withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)upgradeWithDeviceID:(NSString *)device_id withProduct_id:(NSString *)product_id withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 /**
  *  XFile上传
  *
  *  @param data        文件二进制数据
  *  @param accessToken 调用凭证
- *  @param block       完成后的回调
+ *  @param completionHandler       完成后的回调
  */
-+ (void)uploadFileWithData:(NSData *)data withAccessToken:(NSString *)accessToken didLoadData:(RequestCompleteBlock)block;
++ (instancetype)uploadFileWithData:(NSData *)data withAccessToken:(NSString *)accessToken didLoadData:(RequestCompletionHandler)completionHandler;
 
 #pragma mark - tools
 
@@ -733,14 +757,14 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
 
 /**
  进行网络请求
-
+ 
  @param reType 请求类型
  @param url 请求地址
  @param header 请求头
  @param content 请求内容
- @param block 完成后的回调
+ @param completionHandler 完成后的回调
  */
-+(void)requestWithRequestType:(NSString *)reType withUrl:(NSString *)url withHeader:(NSDictionary *)header withContent:(id)content withDidLoadData:(RequestCompleteBlock)block;
++ (instancetype)requestWithRequestType:(NSString *)reType withUrl:(NSString *)url withHeader:(NSDictionary *)header withContent:(id)content withDidLoadData:(RequestCompletionHandler)completionHandler;
 
 
 /**
@@ -751,9 +775,15 @@ typedef NS_ENUM(NSUInteger,ThirdAccountSource) {
  @param header 请求头
  @param content 请求内容
  @param timeout 超时时间
- @param block 完成后的回调
+ @param completionHandler 完成后的回调
  */
-+(void)requestWithRequestType:(NSString *)reType withUrl:(NSString *)url withHeader:(NSDictionary *)header withContent:(id)content withTimeout:(NSUInteger)timeout withDidLoadData:(RequestCompleteBlock)block;
++ (instancetype)requestWithRequestType:(NSString *)reType withUrl:(NSString *)url withHeader:(NSDictionary *)header withContent:(id)content withTimeout:(NSUInteger)timeout withDidLoadData:(RequestCompletionHandler)completionHandler;
+
+
+/**
+ 取消请求
+ */
+- (void)cancelRequest;
 
 @end
 

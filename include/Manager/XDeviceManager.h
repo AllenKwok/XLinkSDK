@@ -98,5 +98,4 @@
 - (XDevice *)getDeviceWithDeviceId:(NSUInteger)deviceId;
 
 
-
 @end
