@@ -16,16 +16,14 @@ typedef void (^XLinkGetDeviceTaskCompletionHandler)(NSArray <XDevice *> *devices
 /**
  获取设备列表
  
- @param userId 用户id
  @param version 版本号，默认值为0
  @param timeout 超时时间
  @param completionHandler 完成后回调
  @return 任务
  */
-+ (instancetype)getDeviceListTaskWithUserId:(NSNumber *)userId
-                                    version:(int)version
-                                    timeout:(NSUInteger)timeout
-                              completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
++ (instancetype)getDeviceListTaskWithVersion:(int)version
+                                     timeout:(NSUInteger)timeout
+                           completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
 @end
 
@@ -44,6 +42,6 @@ typedef void (^XLinkGetDeviceTaskCompletionHandler)(NSArray <XDevice *> *devices
  */
 + (instancetype)getDeviceListTaskWithUserId:(NSNumber *)userId
                                 withVersion:(int)version
-                                withTimeOut:(NSUInteger)timeout withCompleteBlock:(XLinkGetDeviceTaskCompletionHandler)completeBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，使用+getDeviceListTaskWithUserId:version:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
+                                withTimeOut:(NSUInteger)timeout withCompleteBlock:(XLinkGetDeviceTaskCompletionHandler)completeBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，使用+getDeviceListTaskWithVersion:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
 
 @end

@@ -8,7 +8,6 @@
 
 #pragma once
 
-
 typedef NS_ENUM(NSInteger, XLinkErrorCode) {
     //没有错误
     XLinkErrorCodeNoError = 0,
@@ -99,7 +98,7 @@ typedef NS_ENUM(NSInteger, XLinkErrorCode) {
     //Socket 连接超时
     XLinkErrorCodeSocketTimeout = 400103,
     //SDK还没启动
-    XLinkErrorCodeSDKNotStarted = 400103,
+    XLinkErrorCodeSDKNotStarted = 400104,
     //Client操作时参数不合法,比如无法获取到Clientid拼接Topic进行通讯
     XLinkErrorCodeMqttFailClientParamsNotExist = 400201,
     //Client不存在,无法进行相关通讯操作
@@ -175,7 +174,6 @@ typedef NS_ENUM(NSInteger, XLinkErrorCode) {
     //配置项不正确的
     //没有配置企业id
     XLinkErrorCodeConfigWithoutCropId = 400701,
-    
     
     //进入产测成功
     XLinkErrorCodeFactoryStartLocalSuccess = 500100,

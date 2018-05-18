@@ -1,6 +1,6 @@
 //
 //  XLinkRetryUntilTimeoutTask.h
-//  TestTaskQueue
+//  XLinkSDKQueue
 //
 //  Created by AllenKwok on 2017/4/28.
 //  Copyright © 2017年 www.xlink.cn. All rights reserved.

@@ -53,9 +53,8 @@ typedef void (^XLinkShareDeviceTaskCompletionHandler)(NSDictionary *result, XLin
 @property(copy, nonatomic) NSString *authority;
 
 
-
 /**
- 创建一个分享设备task
+ 新建通过账号分享设备任务
  
  @param device 设备
  @param account 对方账号（邮箱或者手机号）
@@ -75,7 +74,7 @@ typedef void (^XLinkShareDeviceTaskCompletionHandler)(NSDictionary *result, XLin
                             completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
 /**
- 创建一个分享设备task
+ 新建通过openId分享设备任务
  
  @param device 设备
  @param openId 对方openId
@@ -102,7 +101,7 @@ typedef void (^XLinkShareDeviceTaskCompletionHandler)(NSDictionary *result, XLin
 @interface XLinkShareDeviceTask (XLinkDeprecated)
 
 /**
- 创建一个分享设备task
+ 新建通过账号分享设备任务
  
  @param device 设备
  @param account 对方账号（邮箱或者手机号）
@@ -122,7 +121,7 @@ typedef void (^XLinkShareDeviceTaskCompletionHandler)(NSDictionary *result, XLin
          withShareDeviceTaskCompleteBlock:(XLinkShareDeviceTaskCompletionHandler)shareCompleteBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，使用+shareDeviceTaskWithDevice:account:expired:shareMode:authority:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
 
 /**
- 创建一个分享设备task
+ 新建通过openId分享设备任务
  
  @param device 设备
  @param openId 对方openId
@@ -141,7 +140,7 @@ typedef void (^XLinkShareDeviceTaskCompletionHandler)(NSDictionary *result, XLin
                             withShareMode:(XLinkShareDeviceMode)shareDeviceMode
                             withAuthority:(NSString *)authority
                               withTimeOut:(NSUInteger)timeout
-         withShareDeviceTaskCompleteBlock:(XLinkShareDeviceTaskCompletionHandler)shareCompleteBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，使用+shareDeviceTaskWithDevice:openId:sourceType:expired:shareMode:authority:timeout:completeBlock:替换,以后的版本将可能会删除此方法");;
+         withShareDeviceTaskCompleteBlock:(XLinkShareDeviceTaskCompletionHandler)shareCompleteBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，使用+shareDeviceTaskWithDevice:openId:sourceType:expired:shareMode:authority:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
 
 @end
 

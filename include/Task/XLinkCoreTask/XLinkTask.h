@@ -1,6 +1,6 @@
 //
 //  Task.h
-//  TestTask
+//  XLinkSDK
 //
 //  Created by AllenKwok on 2017/2/9.
 //  Copyright © 2017年 www.xlink.cn. All rights reserved.

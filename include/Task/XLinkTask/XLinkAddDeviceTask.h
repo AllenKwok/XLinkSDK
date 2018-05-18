@@ -35,7 +35,7 @@
 
 
 /**
- 新建添加设备任务
+ 新建二维码添加设备任务
  
  @param qrcodeString 扫描的二维码
  @param timeout 设置超时，单位秒，默认90秒
@@ -67,7 +67,7 @@
 
 
 /**
- 新建添加设备任务
+ 新建二维码添加设备任务
  
  @param qrcodeString 扫描的二维码
  @param timeout 设置超时，单位秒，默认90秒

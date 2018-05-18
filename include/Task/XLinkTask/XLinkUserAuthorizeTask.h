@@ -30,7 +30,7 @@ typedef void (^XLinkUserAuthorizeTaskCompletionHandler)(id result, NSError *err)
 
 
 /**
- 用户使用账号密码登陆task
+ 新建用户使用账号密码登陆任务
  
  @param account 账号
  @param password 密码
@@ -51,7 +51,7 @@ typedef void (^XLinkUserAuthorizeTaskCompletionHandler)(id result, NSError *err)
 @interface XLinkUserAuthorizeTask (XLinkDeprecated)
 
 /**
- 用户使用账号密码登陆task
+ 新建用户使用账号密码登陆任务
  
  @param account 账号
  @param password 密码
@@ -60,7 +60,11 @@ typedef void (^XLinkUserAuthorizeTaskCompletionHandler)(id result, NSError *err)
  @param completeBlock 完成后的回调
  @return task
  */
-+ (instancetype)userAuthorizeTaskWithAccount:(NSString *)account withPassword:(NSString *)password withCropId:(NSString *)cropId withTimeout:(NSUInteger)timeout withCompleteBlock:(XLinkUserAuthorizeTaskCompletionHandler)completeBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，使用+userAuthorizeTaskWithAccount:password:cropId:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
++ (instancetype)userAuthorizeTaskWithAccount:(NSString *)account
+                                withPassword:(NSString *)password
+                                  withCropId:(NSString *)cropId
+                                 withTimeout:(NSUInteger)timeout
+                           withCompleteBlock:(XLinkUserAuthorizeTaskCompletionHandler)completeBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，使用+userAuthorizeTaskWithAccount:password:cropId:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
 
 @end
 

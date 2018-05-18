@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+//设备类型
 typedef NS_ENUM(NSUInteger, XDeviceType) {
     XDeviceTypeSingleDevice = 0,//单品设备
     XDeviceTypeMasterGateway,//主网关
     XDeviceTypeSubDevice,//子设备
 };
-
 
 //设备连接状态
 typedef NS_ENUM(uint8_t, XDeviceConnectionState) {
@@ -22,7 +22,6 @@ typedef NS_ENUM(uint8_t, XDeviceConnectionState) {
     XDeviceConnectionStateConnecting = 2,//SDK正在连接设备
     XDeviceConnectionStateOnline = 3,//SDK设备保持连接
 };
-
 
 @interface XDevice : NSObject
 /**
@@ -122,12 +121,10 @@ typedef NS_ENUM(uint8_t, XDeviceConnectionState) {
  */
 @property(assign, nonatomic) XDeviceConnectionState cloudConnectionState;
 
-
 /**
  父设备
  */
 @property(weak, nonatomic) XDevice *parentDevice;
-
 
 /**
  *  通过字典还原成设备实体
