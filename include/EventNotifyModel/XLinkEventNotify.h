@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XLinkConst.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, EventNotifyFromType) {
     EventNotifyFromSever = 1,//来自Server触发事件
@@ -60,12 +63,8 @@ typedef NS_ENUM(NSUInteger, EventNotifyType) {
  */
 @property(nonatomic, copy) NSData *notifyData;
 
-/**
- 初始化类的方法，外部不需要调用
- 
- @param data 二进制数据
- @return self
- */
-- (instancetype)initWithData:(NSData *)data;
+
 
 @end
+
+NS_ASSUME_NONNULL_END

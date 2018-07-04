@@ -8,6 +8,8 @@
 
 #import "XLinkBackoffTask.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - XLinkRetryUntilTimeoutTaskDataSource
 
 @protocol XLinkRetryUntilTimeoutTaskDataSource <NSObject>
@@ -26,3 +28,4 @@
 @property(assign, nonatomic) NSUInteger totalTimeout;
 
 @end
+NS_ASSUME_NONNULL_END

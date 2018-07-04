@@ -8,6 +8,8 @@
 
 #import "XLinkTask.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSUInteger, XDeviceConnectionPolicy) {
     XDeviceConnectionPolicyAuto,//自动连接策略
     XDeviceConnectionPolicyLocalOnly,//只进行本地连接
@@ -62,3 +64,4 @@ typedef NS_ENUM(NSUInteger, XDeviceConnectionPolicy) {
                           withCompleteBlock:(OnTaskCompleteBlock)completeBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，使用+connectDeviceTaskWithDevice:connectionPolicy:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
 
 @end
+NS_ASSUME_NONNULL_END

@@ -6,10 +6,12 @@
 //  Copyright © 2017年 www.xlink.cn. All rights reserved.
 //
 
-//将当前用户的设备设备从云端同步到本地。要求设备和当前用户之间有订阅关系。任务完成后默认自动发起本地连接和云端连接。
+//将当前用户的设备从云端同步到本地。要求设备和当前用户之间有订阅关系。任务完成后默认自动发起本地连接和云端连接。
 
 #import "XLinkTask.h"
 #import "XDevice.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^XLinkSyncDeviceListCompletionHandler)(NSArray <XDevice *> *devices, XLinkErrorCode code);
 
@@ -62,3 +64,4 @@ typedef void (^XLinkSyncDeviceListCompletionHandler)(NSArray <XDevice *> *device
                             withCompleteBlock:(XLinkSyncDeviceListCompletionHandler)syncCompleteBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，请使用+syncDeviceListTaskWithVersion:timeout:connectLocal:completeBlock:替换,以后的版本将可能会删除此方法");
 
 @end
+NS_ASSUME_NONNULL_END

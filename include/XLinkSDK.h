@@ -12,11 +12,14 @@
 #import "XLinkDataPoint.h"
 #import "XLinkUserModel.h"
 #import "XLinkErrorCode.h"
+#import "XLinkConst.h"
 
 @class XLinkTask;
 @class XLinkEventNotify;
 @class XLinkDataPointManager;
 @class XDeviceManager;
+
+NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark 设置云端回调
 //和cloud服务器连接状态
@@ -123,31 +126,31 @@ typedef NS_ENUM(NSUInteger, LogoutReason) {
 /**
  SDK云端连接状态回调
  */
-@property(weak, nonatomic) id <XLinkCloudDelegate> cloudDelegate;
+@property(weak, nonatomic,nullable) id <XLinkCloudDelegate> cloudDelegate;
 /**
  SDK用户授权相关回调
  */
-@property(weak, nonatomic) id <XLinkUserDelegate> userDelegate;
+@property(weak, nonatomic,nullable) id <XLinkUserDelegate> userDelegate;
 /**
  SDK数据相关的delegate，包括接收到dataPoint的更新
  */
-@property(weak, nonatomic) id <XLinkDataDelegate> dataDelegate;
+@property(weak, nonatomic,nullable) id <XLinkDataDelegate> dataDelegate;
 /**
  SDK设备状态相关的delegate，包括设备在线离线状态和设备属性的变化
  */
-@property(weak, nonatomic) id <XLinkDeviceStateDelegate> deviceStateDelegate;
+@property(weak, nonatomic,nullable) id <XLinkDeviceStateDelegate> deviceStateDelegate;
 /**
  SDK全局的配置
  */
-@property(strong, nonatomic) XLinkConfig *xlinkConfig;
+@property(strong, nonatomic ,nullable) XLinkConfig *xlinkConfig;
 /**
  SDK的dataPoint管理类
  */
-@property(strong, nonatomic) XLinkDataPointManager *dataPointManager;
+@property(strong, nonatomic ,nullable) XLinkDataPointManager *dataPointManager;
 /**
  SDK的设备管理类
  */
-@property(strong, nonatomic) XDeviceManager *deviceManager;
+@property(strong, nonatomic ,nullable) XDeviceManager *deviceManager;
 /**
  SDK的云端登陆状态
  */
@@ -155,7 +158,7 @@ typedef NS_ENUM(NSUInteger, LogoutReason) {
 /**
  当前登陆的用户
  */
-@property(strong, nonatomic) XLinkUserModel *userModel;
+@property(strong, nonatomic ,nullable) XLinkUserModel *userModel;
 /**
  用于判断sdk是否已经启动
  */
@@ -221,3 +224,6 @@ typedef NS_ENUM(NSUInteger, LogoutReason) {
 - (void)stopTask:(XLinkTask *)task;
 
 @end
+
+NS_ASSUME_NONNULL_END
+

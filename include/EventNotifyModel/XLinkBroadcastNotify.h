@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XLinkConst.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  厂商推送的消息广播 
@@ -44,3 +47,5 @@
 @property(copy, nonatomic) NSString *content;
 
 @end
+
+NS_ASSUME_NONNULL_END

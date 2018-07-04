@@ -7,15 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XLinkConst.h"
 
+NS_ASSUME_NONNULL_BEGIN
 /**
  设备在线状态变化引发的告警
  */
-
 typedef NS_ENUM(NSUInteger, DeviceOnlineState) {
     DeviceOnlineStateOffline = 0,//离线
     DeviceOnlineStateOnline = 1,//在线
 };
+
 
 @interface XLinkDeviceOnlineStateAlertNotify : NSObject
 
@@ -30,3 +32,4 @@ typedef NS_ENUM(NSUInteger, DeviceOnlineState) {
 @property(assign, nonatomic) DeviceOnlineState state;
 
 @end
+NS_ASSUME_NONNULL_END

@@ -7,10 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XLinkConst.h"
 
 /**
  设备管理员推送的分享消息
  */
+
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSUInteger, DeviceShareState) {
     DeviceShareStateShareRequest = 0,//分享请求
     DeviceShareStateAcceptShare = 1,//接受分享
@@ -36,3 +40,4 @@ typedef NS_ENUM(NSUInteger, DeviceShareState) {
 @property(assign, nonatomic) DeviceShareState shareState;
 
 @end
+NS_ASSUME_NONNULL_END

@@ -8,6 +8,8 @@
 
 #import "XLinkTask.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef void (^XLinkUserAuthorizeTaskCompletionHandler)(id result, NSError *err);
 
 @interface XLinkUserAuthorizeTask : XLinkTask
@@ -68,3 +70,4 @@ typedef void (^XLinkUserAuthorizeTaskCompletionHandler)(id result, NSError *err)
 
 @end
 
+NS_ASSUME_NONNULL_END

@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XLinkConst.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 //设备类型
 typedef NS_ENUM(NSUInteger, XDeviceType) {
@@ -23,87 +26,98 @@ typedef NS_ENUM(uint8_t, XDeviceConnectionState) {
     XDeviceConnectionStateOnline = 3,//SDK设备保持连接
 };
 
-@interface XDevice : NSObject
-/**
- 产品ID
- */
-@property(nonatomic, copy) NSString *productID;
-/**
- MAC地址
- */
-@property(nonatomic, copy) NSData *macAddress;
-/**
- 设备名称
- */
-@property(nonatomic, copy) NSString *deviceName;
-/**
- 权限
- */
-@property(nonatomic, strong) NSNumber *role;
-/**
- 来源
- */
-@property(nonatomic, strong) NSNumber *source;
-/**
- 设备ID
- */
-@property(nonatomic, assign) uint32_t deviceID;
-/**
- 内网配对id
- */
-@property(assign, nonatomic) uint16_t pairingID;
-/**
- 内网配对秘钥
- */
-@property(copy, nonatomic) NSData *pairingSignature;
-/**
- 内网配对凭证
- */
-@property(copy, nonatomic) NSData *ticket;
-/**
- IP地址
- */
-@property(copy, nonatomic) NSData *address;
-/**
- 协议版本
- */
-@property(nonatomic, assign) uint8_t protocolVersion;
 
-/**
- 固件版本号
- */
-@property(nonatomic, assign) uint16_t firmwareVersion;
-/**
- mcu软件版本号
- */
-@property(nonatomic, assign) uint16_t mcuVersion;
-/**
- 上次登录的时间，格式2017-10-17T17:43:35.881Z
- */
-@property(copy, nonatomic) NSString *lastLoginDate;
-/**
- 订阅设备的时间
- */
-@property(copy, nonatomic) NSString *subscribeDate;
-/**
- 设备类型
- */
-@property(nonatomic, assign) XDeviceType deviceType;
-/**
- 设备是否被绑定过
- */
-@property(assign, nonatomic) uint8_t isBinded;
-/**
- 云端是否在线
- */
-@property(assign, nonatomic) BOOL isCloudOnline;
+@interface XDevice : NSObject
+
+/** 产品ID*/
+@property (copy, nonatomic) NSString *productID;
+
+/** MAC地址*/
+@property (copy, nonatomic) NSData *macAddress;
+
+/** 设备名称*/
+@property (copy, nonatomic) NSString *deviceName;
+
+/** 权限*/
+@property (strong, nonatomic) NSNumber *role;
+
+/** 来源*/
+@property (strong, nonatomic) NSNumber *source;
+
+/** 设备ID*/
+@property (assign, nonatomic) uint32_t deviceID;
+
+/** 内网配对id*/
+@property (assign, nonatomic) uint16_t pairingID;
+
+/** 内网配对秘钥*/
+@property (copy, nonatomic) NSData *pairingSignature;
+
+/** 内网配对凭证*/
+@property (copy, nonatomic,nullable) NSData *ticket;
+
+/** IP地址*/
+@property (copy, nonatomic) NSData *address;
+
+/** 协议版本*/
+@property (assign, nonatomic) uint16_t protocolVersion;
+
+/** 固件型号*/
+@property (copy, nonatomic) NSString *firmwareMod;
+
+/** 固件版本号*/
+@property (copy, nonatomic) NSString *firmwareVersion;
+
+/** MCU型号*/
+@property (copy, nonatomic) NSString *mcuMod;
+
+/** mcu软件版本号*/
+@property (copy, nonatomic) NSString *mcuVersion;
+
+/** 上次登录的时间，格式2017-10-17T17:43:35.881Z*/
+@property (copy, nonatomic) NSString *lastLoginDate;
+
+/** 订阅设备的时间*/
+@property (copy, nonatomic) NSString *subscribeDate;
+
+/** 设备序列号*/
+@property (copy, nonatomic) NSString *sn;
+
+/** 对设备的控制权限，**R可读，W可写，RW可读可写；默认为null相当于RW**；*/
+@property (copy, nonatomic) NSString *authority;
+
+/** 是否激活*/
+@property (assign, nonatomic) BOOL isActive;
+
+/** 设备的激活时间*/
+@property (copy, nonatomic) NSString *activeDate;
+
+/** 激活码*/
+@property (copy, nonatomic) NSString *activeCode;
+
+/** 认证码*/
+@property (copy, nonatomic) NSString *authorizeCode;
+
+/** 设备销售时间*/
+@property (copy, nonatomic) NSString *salesDate;
+
+/** 设备类型*/
+@property (assign, nonatomic) XDeviceType deviceType;
+
+/** 设备是否被绑定过*/
+@property (assign, nonatomic) uint8_t isBinded;
+
+/** 云端是否在线*/
+@property (assign, nonatomic) BOOL isCloudOnline;
+
 /**
  返回DETACHED时，表示SDK尚未尝试过内网或者外网连接。
  返回OFFLINE时，表示SDK与设备无内外网连接
  返回ONLINE时，表示SDK与设备内外网连接或者内网连接。
  返回CONNECTING时，表示SDK与设备无内外网连接，但正在尝试进行内网或者外网连接。
  */
-@property(assign, nonatomic) XDeviceConnectionState connectionState;
+@property (assign, nonatomic) XDeviceConnectionState connectionState;
+
 /**
  内网连接状态
  返回DETACHED时，表示SDK尚未尝试过内网连接。
@@ -111,7 +125,8 @@ typedef NS_ENUM(uint8_t, XDeviceConnectionState) {
  返回ONLINE时，表示SDK与设备内网连接。
  返回CONNECTING时，正在尝试进行内网连接。
  */
-@property(assign, nonatomic) XDeviceConnectionState localConnectionState;
+@property (assign, nonatomic) XDeviceConnectionState localConnectionState;
+
 /**
  外网连接状态
  返回DETACHED时，表示SDK尚未尝试过外网连接。
@@ -119,17 +134,15 @@ typedef NS_ENUM(uint8_t, XDeviceConnectionState) {
  返回ONLINE时，表示SDK与设备外网连接。
  返回CONNECTING时，正在尝试进行外网连接。
  */
-@property(assign, nonatomic) XDeviceConnectionState cloudConnectionState;
+@property (assign, nonatomic) XDeviceConnectionState cloudConnectionState;
 
-/**
- 父设备
- */
-@property(weak, nonatomic) XDevice *parentDevice;
+/** 父设备*/
+@property (weak, nonatomic,nullable) XDevice *parentDevice;
 
 /**
  *  通过字典还原成设备实体
  *
- *  @param dic 设备字典；字典支持protocol 1格式的字典
+ *  @param dic 设备字典
  *
  *  @return 设备实体
  */
@@ -165,3 +178,4 @@ typedef NS_ENUM(uint8_t, XDeviceConnectionState) {
 - (BOOL)isEqualToDevice:(XDevice *)otherDevice;
 
 @end
+NS_ASSUME_NONNULL_END

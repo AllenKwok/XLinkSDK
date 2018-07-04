@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XLinkConst.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
 /**
  设备数据端点变换引起的报警
  */
@@ -29,3 +31,4 @@
 @property(copy, nonatomic) NSString *alarmMessage;
 
 @end
+NS_ASSUME_NONNULL_END

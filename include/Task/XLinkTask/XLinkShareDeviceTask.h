@@ -10,6 +10,8 @@
 #import "XLinkThirdPartyAuthorizeTask.h"
 #import "XDevice.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 //分享的方式
 typedef NS_ENUM(NSUInteger, XLinkShareDeviceMode) {
     XLinkShareDeviceModeApp,//通过账号分享
@@ -143,4 +145,4 @@ typedef void (^XLinkShareDeviceTaskCompletionHandler)(NSDictionary *result, XLin
          withShareDeviceTaskCompleteBlock:(XLinkShareDeviceTaskCompletionHandler)shareCompleteBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，使用+shareDeviceTaskWithDevice:openId:sourceType:expired:shareMode:authority:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
 
 @end
-
+NS_ASSUME_NONNULL_END

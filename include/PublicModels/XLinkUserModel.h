@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XLinkConst.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface XLinkUserModel : NSObject
 
@@ -61,3 +64,5 @@
 - (NSDictionary *)getAuthorizeDict;
 
 @end
+
+NS_ASSUME_NONNULL_END

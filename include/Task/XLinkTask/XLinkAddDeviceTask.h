@@ -7,9 +7,9 @@
 //
 
 #import "XLinkTask.h"
-
 @class XDevice;
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface XLinkAddDeviceTask : XLinkTask
 
@@ -18,6 +18,10 @@
  */
 @property(strong, nonatomic) XDevice *device;
 
+/**
+ 是否需要订阅设备,默认情况下为YES
+ */
+@property (assign, nonatomic) BOOL needSubscription;
 
 /**
  新建添加设备任务
@@ -29,7 +33,7 @@
  @return XLinkAddDeviceTask
  */
 + (instancetype)addDeviceTaskWithDevice:(XDevice *)device
-                                pinCode:(NSData *)pinCode
+                                pinCode:(NSData * _Nullable)pinCode
                                 timeout:(NSUInteger)timeout
                           completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
@@ -61,7 +65,7 @@
  @return XLinkAddDeviceTask
  */
 + (instancetype)addDeviceTaskWithDevice:(XDevice *)device
-                            withPinCode:(NSData *)pinCode
+                            withPinCode:(NSData * _Nullable)pinCode
                             withTimeOut:(NSUInteger)timeout
                       withCompleteBlock:(OnTaskCompleteBlock)completeBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，请使用+addDeviceTaskWithDevice:pinCode:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
 
@@ -79,4 +83,4 @@
                             withCompleteBlock:(OnTaskCompleteBlock)completeBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，请使用+addDeviceTaskWithQrcodeString:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
 
 @end
-
+NS_ASSUME_NONNULL_END

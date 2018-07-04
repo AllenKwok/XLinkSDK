@@ -16,7 +16,9 @@
 #import "XLinkSubscriptionChangeNotify.h"
 #import "XLinkDeviceOnlineStateAlertNotify.h"
 #import "XLinkDeviceOnlineStateChangedNotify.h"
+#import "XLinkConst.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface EventNotifyHelper : NSObject
 
@@ -95,3 +97,5 @@
 + (XLinkDeviceOnlineStateAlertNotify *)parseDeviceOnlineStateAlertNotifyWithData:(NSData *)data;
 
 @end
+
+NS_ASSUME_NONNULL_END

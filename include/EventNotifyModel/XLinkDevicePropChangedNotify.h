@@ -7,15 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XLinkConst.h"
 /**
  设备属性变化通知 
  */
+
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSUInteger, DevicePropChangedType) {
     DevicePropChangedTypeInfo = 0,//设备基本属性变化
     DevicePropChangedTypeProp = 1,//设备扩展属性变化
     DevicePropChangedTypeOnline = 2, //设备上线
     DevicePropChangedTypeOffline = 3,//设备下线
 };
+
 
 @interface XLinkDevicePropChangedNotify : NSObject
 
@@ -24,3 +29,4 @@ typedef NS_ENUM(NSUInteger, DevicePropChangedType) {
 @property(assign, nonatomic) DevicePropChangedType type;
 
 @end
+NS_ASSUME_NONNULL_END

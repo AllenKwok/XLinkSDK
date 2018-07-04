@@ -8,6 +8,8 @@
 
 #import "XLinkMaxRetryTask.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 #pragma mark - XLinkBackoffTaskDataSource
 
 @protocol XLinkBackoffTaskDataSource <NSObject>
@@ -22,3 +24,4 @@
 @property(assign, nonatomic) NSUInteger initInterval;
 
 @end
+NS_ASSUME_NONNULL_END

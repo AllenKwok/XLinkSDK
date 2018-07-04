@@ -8,6 +8,8 @@
 
 #import "XLinkTask.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSUInteger, XLinkHandleShareDeviceAction) {
     XLinkHandleShareDeviceActionAccept,//接受分享
     XLinkHandleShareDeviceActionDeny,//拒绝分享
@@ -60,3 +62,5 @@ typedef NS_ENUM(NSUInteger, XLinkHandleShareDeviceAction) {
                                withTaskCompleteBlock:(OnTaskCompleteBlock)completeBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，使用+handleShareDeviceTaskWithInviteCode:handleShareAction:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -8,8 +8,10 @@
 
 #import "XLinkTask.h"
 
+NS_ASSUME_NONNULL_BEGIN
 @interface XLinkMaxRetryTask : XLinkTask
 
 @property(assign, nonatomic) NSUInteger maxRetryCount;
 
 @end
+NS_ASSUME_NONNULL_END

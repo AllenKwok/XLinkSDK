@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "XLinkErrorCode.h"
-
+#import "XLinkConst.h"
 @class XLinkTask;
+
+NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - XLinkTaskDataSource
 
@@ -70,7 +72,7 @@ typedef void (^TimeoutBlock)(void);
 
 
 typedef void (^XLinkTaskDidStartHandler)(void);
-typedef void (^XLinkTaskDidCompletionHandler)(id result, NSError *error);
+typedef void (^XLinkTaskDidCompletionHandler)( id _Nullable result, NSError *_Nullable error);
 typedef void (^XLinkTaskDidTimeoutHandler)(void);
 
 @interface XLinkTask : NSObject <XLinkTaskDataSource>
@@ -99,23 +101,23 @@ typedef void (^XLinkTaskDidTimeoutHandler)(void);
 /**
  任务返回的结果
  */
-@property(strong, nonatomic) id result;
-@property(strong, nonatomic) NSError *error;
+@property(strong, nonatomic ,nullable) id result;
+@property(strong, nonatomic ,nullable) NSError *error;
 
 
 #pragma mark - callback
 /**
  task开始的回调
  */
-@property (copy, nonatomic) XLinkTaskDidStartHandler taskDidStartHandler;
+@property (copy, nonatomic ,nullable) XLinkTaskDidStartHandler taskDidStartHandler;
 /**
  task完成的回调
  */
-@property (copy, nonatomic) XLinkTaskDidCompletionHandler taskDidCompletionHandler;
+@property (copy, nonatomic ,nullable) XLinkTaskDidCompletionHandler taskDidCompletionHandler;
 /**
  task超时的回调
  */
-@property (copy, nonatomic) XLinkTaskDidTimeoutHandler taskDidTimeoutHandler;
+@property (copy, nonatomic ,nullable) XLinkTaskDidTimeoutHandler taskDidTimeoutHandler;
 
 #pragma mark - 外部函数
 
@@ -129,23 +131,22 @@ typedef void (^XLinkTaskDidTimeoutHandler)(void);
  */
 - (void)cancel;
 
-
-
 #pragma mark - 以下是废弃属性
 /**
  task开始的回调
  */
-@property(copy, nonatomic) OnTaskStartBlock taskStartBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已过期, 用taskDidStartHandler替换");
+@property(copy, nonatomic,nullable) OnTaskStartBlock taskStartBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已过期, 用taskDidStartHandler替换");
 /**
  task完成的回调
  */
-@property(copy, nonatomic) OnTaskCompleteBlock taskCompleteBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已过期, 用taskDidCompletionHandler替换");
+@property(copy, nonatomic,nullable) OnTaskCompleteBlock taskCompleteBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已过期, 用taskDidCompletionHandler替换");
 /**
  任务超时之后的回调
  */
-@property(copy, nonatomic) TimeoutBlock timeoutBlock
+@property(copy, nonatomic,nullable) TimeoutBlock timeoutBlock
 NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已过期, 用taskDidTimeoutHandler替换");
 #pragma mark - 以上是废弃属性
 
-
 @end
+
+NS_ASSUME_NONNULL_END

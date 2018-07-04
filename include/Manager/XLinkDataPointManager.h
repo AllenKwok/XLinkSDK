@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "XLinkDataPointObserver.h"
 #import "XDevice.h"
+#import "XLinkConst.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface XLinkDataPointManager : NSObject
 
@@ -43,12 +46,23 @@
  */
 - (void)removeDataPointObserver:(XLinkDataPointObserver *)dataPointObserver;
 
+
+/**
+ 移除某个设备所有dataPoint的监听
+ 
+ @param device 设备实体
+ */
+- (void)removeAllDataPointObserverWithDevice:(XDevice *)device;
+
 /**
  获取设备的dataPoint的模板
  
  @param device 设备
  @param block 完成后的回调
  */
-- (void)getDataPointSourceWithDevice:(XDevice *)device withFinishBlock:(void (^)(NSArray <XLinkDataPoint *> *))block;
+- (void)getDataPointSourceWithDevice:(XDevice *)device
+                     withFinishBlock:(void (^)(NSArray <XLinkDataPoint *> *))block;
 
 @end
+
+NS_ASSUME_NONNULL_END

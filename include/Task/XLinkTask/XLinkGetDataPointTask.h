@@ -9,6 +9,8 @@
 #import "XLinkSendPolicyTask.h"
 #import "XDevice.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class XLinkDataPoint;
 @class XLinkGetDataPointTask;
 
@@ -51,3 +53,5 @@ typedef void (^XLinkGetDataPointTaskCompletionHandler)(NSArray <XLinkDataPoint *
          withGetDataPointTaskCompleteBlock:(XLinkGetDataPointTaskCompletionHandler)completeBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，使用+getDataPointTaskWithDevice:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
 
 @end
+
+NS_ASSUME_NONNULL_END

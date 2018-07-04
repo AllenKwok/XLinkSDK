@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "XLinkConst.h"
 @class XDevice;
 @class XLinkDataPoint;
+
+NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^DataPointUpdateBlock)(XDevice *device, NSArray <XLinkDataPoint *> *dataPoints);
 
@@ -22,7 +24,7 @@ typedef void (^DataPointUpdateBlock)(XDevice *device, NSArray <XLinkDataPoint *>
 /**
  要监听的dataPoint的index数组，不传或者传空数组默认监听所有的dataPoint
  */
-@property(strong, nonatomic, readonly) NSArray *indexArray;
+@property(strong, nonatomic, readonly,nullable) NSArray *indexArray;
 /**
  监听到dataPoint变化的回调
  */
@@ -37,6 +39,8 @@ typedef void (^DataPointUpdateBlock)(XDevice *device, NSArray <XLinkDataPoint *>
  @param block 监听到dataPoint变化的回调
  @return 该监听的对象
  */
-+ (instancetype)dataPointObserverWithDevice:(XDevice *)device IndexArray:(NSArray *)indexArray withDataPointUpdateBlock:(DataPointUpdateBlock)block;
++ (instancetype)dataPointObserverWithDevice:(XDevice *)device IndexArray:(NSArray *_Nullable)indexArray withDataPointUpdateBlock:(DataPointUpdateBlock)block;
 
 @end
+
+NS_ASSUME_NONNULL_END

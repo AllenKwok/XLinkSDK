@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "XLinkDeviceOnlineStateAlertNotify.h"
+#import "XLinkConst.h"
 
+NS_ASSUME_NONNULL_BEGIN
 /**
  设备在线状态变化引发的通知
  */
@@ -25,3 +27,4 @@
 @property(assign, nonatomic) DeviceOnlineState state;
 
 @end
+NS_ASSUME_NONNULL_END

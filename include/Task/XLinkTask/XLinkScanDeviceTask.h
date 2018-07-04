@@ -9,6 +9,8 @@
 #import "XLinkRetryUntilTimeoutTask.h"
 #import "XDevice.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef void (^XLinkDidDiscoveredDeviceHandler)(XDevice *device);
 
 @interface XLinkScanDeviceTask : XLinkRetryUntilTimeoutTask
@@ -21,7 +23,7 @@ typedef void (^XLinkDidDiscoveredDeviceHandler)(XDevice *device);
 /**
  扫描到设备后回调
  */
-@property(copy, nonatomic) XLinkDidDiscoveredDeviceHandler discoveredDeviceHandler;
+@property(copy, nonatomic,nullable) XLinkDidDiscoveredDeviceHandler discoveredDeviceHandler;
 
 /**
  新建扫描设备任务
@@ -58,3 +60,4 @@ typedef void (^XLinkDidDiscoveredDeviceHandler)(XDevice *device);
                            withCompleteBlock:(OnTaskCompleteBlock)completeBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，请使用+scanDeviceTaskWithProductIdArray:timeout:didDiscoveredDeviceHandler:completionHandler:替换,以后的版本将可能会删除此方法");
 
 @end
+NS_ASSUME_NONNULL_END

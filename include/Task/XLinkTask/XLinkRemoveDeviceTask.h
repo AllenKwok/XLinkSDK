@@ -9,6 +9,8 @@
 #import "XLinkRetryUntilTimeoutTask.h"
 #import "XDevice.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface XLinkRemoveDeviceTask : XLinkRetryUntilTimeoutTask
 
 /**
@@ -46,3 +48,4 @@
                                withTimeOut:(NSUInteger)timeout
                          withCompleteBlock:(OnTaskCompleteBlock)completeBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，请使用+removeDeviceTaskWithDevice:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
 @end
+NS_ASSUME_NONNULL_END

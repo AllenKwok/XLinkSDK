@@ -8,6 +8,8 @@
 
 #import "XLinkTask.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSUInteger, XLinkUserSourceType) {
     XLinkUserSourceTypeWeb = 1, //web
     XLinkUserSourceTypeAndroid = 2, //Android客户端
@@ -123,3 +125,4 @@ typedef void (^XLinkUserAuthorizeTaskCompletionHandler)(id result, NSError *err)
                                        withCompleteBlock:(XLinkUserAuthorizeTaskCompletionHandler)completeBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，请使用+thirdForeignUserAuthorizeTaskWithContent:cropId:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
 
 @end
+NS_ASSUME_NONNULL_END

@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "XLinkUserModel.h"
+#import "XLinkConst.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * 数据发送策略。默认为AUTO
@@ -66,12 +69,12 @@ typedef NS_ENUM(NSUInteger, XLinkSendDataPolicy) {
  登录源，用户可以在登录时指定登录源，不同登录源可同时登录
  登陆源只支持数字和字母，最大长度为16个字符，默认为nil;
  */
-@property(copy, nonatomic) NSString *resource;
+@property(copy, nonatomic,nullable) NSString *resource;
 
 /**
  用户model，用于重新登录时候，传入之前保存的用户信息进行登录操作。
  */
-@property(strong, nonatomic) XLinkUserModel *userModel;
+@property(strong, nonatomic,nullable) XLinkUserModel *userModel;
 
 
 #pragma mark - SSL设置
@@ -83,11 +86,11 @@ typedef NS_ENUM(NSUInteger, XLinkSendDataPolicy) {
 /**
  设置SSL证书路径，默认值为nil。
  */
-@property(copy, nonatomic) NSString *SSLCertificateFilePath;
+@property(copy, nonatomic,nullable) NSString *SSLCertificateFilePath;
 /**
  设置SSL证书密码，默认值为nil。
  */
-@property(copy, nonatomic) NSString *SSLCertificateFilePassphrase;
+@property(copy, nonatomic,nullable) NSString *SSLCertificateFilePassphrase;
 
 #pragma mark - log
 /**
@@ -96,7 +99,8 @@ typedef NS_ENUM(NSUInteger, XLinkSendDataPolicy) {
 @property(assign, nonatomic) BOOL debug;
 
 /**
- 在SDK进入后台之后，是否需要建立一个BackgroundTask，以维持短暂的运行时间。这个运行时间取决于系统分配的时间，会在10分钟以内。
+ 在SDK进入后台之后，是否需要建立一个BackgroundTask，以维持短暂的运行时间。
+ 这个运行时间取决于系统分配的时间，会在10分钟以内。
  */
 @property(assign, nonatomic) BOOL shouldBeginBackgroundTask;
 
@@ -109,3 +113,5 @@ typedef NS_ENUM(NSUInteger, XLinkSendDataPolicy) {
 
 
 @end
+
+NS_ASSUME_NONNULL_END

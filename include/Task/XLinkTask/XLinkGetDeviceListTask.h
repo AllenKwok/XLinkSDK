@@ -9,6 +9,8 @@
 #import "XLinkTask.h"
 #import "XDevice.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef void (^XLinkGetDeviceTaskCompletionHandler)(NSArray <XDevice *> *devices, XLinkErrorCode code);
 
 @interface XLinkGetDeviceListTask : XLinkTask
@@ -45,3 +47,4 @@ typedef void (^XLinkGetDeviceTaskCompletionHandler)(NSArray <XDevice *> *devices
                                 withTimeOut:(NSUInteger)timeout withCompleteBlock:(XLinkGetDeviceTaskCompletionHandler)completeBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，使用+getDeviceListTaskWithVersion:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
 
 @end
+NS_ASSUME_NONNULL_END

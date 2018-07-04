@@ -7,6 +7,9 @@
 //
 
 #import "XLinkTask.h"
+#import "XLinkConfig.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - XLinkRetryUntilTimeoutTaskDataSource
 
@@ -35,5 +38,11 @@
 
 @interface XLinkSendPolicyTask : XLinkTask <XLinkSendPolicyTaskDataSource>
 
+/**
+ 这个任务的单独发送策略，只要设置了，就不会受全局的发送策略影响
+ */
+@property (assign, nonatomic) XLinkSendDataPolicy sendDataPolicy;
 
 @end
+
+NS_ASSUME_NONNULL_END

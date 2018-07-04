@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "XLinkErrorDesc.h"
+#import "XLinkConst.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface XLinkErrorCodeHelper : NSObject
 
@@ -36,3 +39,5 @@
 + (NSString *)getErrorCodeDescStr:(NSInteger)errorCode;
 
 @end
+
+NS_ASSUME_NONNULL_END
