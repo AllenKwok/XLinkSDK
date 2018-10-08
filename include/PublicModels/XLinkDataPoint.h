@@ -28,14 +28,10 @@ typedef NS_ENUM(uint8_t, XLinkDataType) {
 
 @interface XLinkDataPoint : NSObject
 
-/**
- 数据端点值数据类型
- */
+///数据端点值数据类型
 @property(assign, nonatomic) XLinkDataType type;
 
-/**
- 数据端点index
- */
+///数据端点index
 @property(assign, nonatomic) uint8_t index;
 
 /**
@@ -46,59 +42,37 @@ typedef NS_ENUM(uint8_t, XLinkDataType) {
  */
 @property(strong, nonatomic) id value;
 
-/**
- 数据端点的长度
- */
+///数据端点的长度
 @property(assign, nonatomic) uint16_t len;
 
-/**
- 数据端点最大值
- */
+///数据端点最大值
 @property(assign, nonatomic) long long maxValue;
 
-/**
- 数据端点最小值
- */
+///数据端点最小值
 @property(assign, nonatomic) long long minValue;
 
-/**
- 数据端点名称
- */
+///数据端点名称
 @property(copy, nonatomic) NSString *name;
 
-/**
- 数据端点描述
- */
+///数据端点描述
 @property (copy, nonatomic) NSString *dataPointDesc;
 
-/**
- 符号
- */
+///符号
 @property (copy, nonatomic) NSString *symbol;
 
-/**
- 数据端点是否可读
- */
+///数据端点是否可读
 @property (assign, nonatomic) BOOL isRead;
 
-/**
- 数据端点是否可写
- */
+///数据端点是否可写
 @property (assign, nonatomic) BOOL isWrite;
 
-/**
- 是否收集端点数据
- */
+///是否收集端点数据
 @property (assign, nonatomic) BOOL isCollect;
 
-/**
- 默认值
- */
+///默认值
 @property (copy, nonatomic) NSString *defaultValue;
 
-/**
- 动态计算数据端点表达式
- */
+///动态计算数据端点表达式
 @property (copy, nonatomic) NSString *expression;
 
 /**

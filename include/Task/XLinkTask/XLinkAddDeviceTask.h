@@ -13,18 +13,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XLinkAddDeviceTask : XLinkTask
 
-/**
- 要添加的设备
- */
+///要添加的设备
 @property(strong, nonatomic) XDevice *device;
 
-/**
- 是否需要订阅设备,默认情况下为YES
- */
+///是否需要订阅设备,默认情况下为YES
 @property (assign, nonatomic) BOOL needSubscription;
 
 /**
- 新建添加设备任务
+ 构建添加设备任务
  
  @param device 要添加的设备
  @param pinCode 安全码，一般为设备会显示出来，需要设备支持。没有的时候传nil即可
@@ -35,20 +31,20 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)addDeviceTaskWithDevice:(XDevice *)device
                                 pinCode:(NSData * _Nullable)pinCode
                                 timeout:(NSUInteger)timeout
-                          completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+                      completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
 
 /**
- 新建二维码添加设备任务
+ 构建二维码添加设备任务
  
  @param qrcodeString 扫描的二维码
  @param timeout 设置超时，单位秒，默认90秒
  @param completionHandler 任务完成后回调
- @return 任务
+ @return XLinkAddDeviceTask
  */
 + (instancetype)addDeviceTaskWithQrcodeString:(NSString *)qrcodeString
                                       timeout:(NSUInteger)timeout
-                                completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+                            completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
 @end
 
@@ -56,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface XLinkAddDeviceTask (XLinkDeprecated)
 
 /**
- 新建添加设备任务
+ 构建添加设备任务
  
  @param device 要添加的设备
  @param pinCode 安全码，一般为设备会显示出来，需要设备支持。没有的时候传nil即可
@@ -71,12 +67,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- 新建二维码添加设备任务
+ 构建二维码添加设备任务
  
  @param qrcodeString 扫描的二维码
  @param timeout 设置超时，单位秒，默认90秒
  @param completeBlock 任务完成后回调
- @return 任务
+ @return XLinkAddDeviceTask
  */
 + (instancetype)addDeviceTaskWithQrcodeString:(NSString *)qrcodeString
                                   withTimeOut:(NSUInteger)timeout

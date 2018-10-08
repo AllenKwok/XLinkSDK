@@ -84,7 +84,17 @@ typedef NS_ENUM(NSInteger, XLinkErrorCode) {
     //云端订阅设备失败，设备订阅模式限制订阅失败
     XLinkErrorCodeSubscribeDeviceFailDeviceModeLimited = 201605,
     //云端获取Ticket成功
-    XLinkErrorCodeGetTicketCloudSuccess = 202000,
+    XLinkErrorCodeGetTicketCloudSuccess = 202200,
+    //云端请求订阅码成功
+    XLinkErrorCodeRequestSubCodeCloudSuccess = 203901,
+    //云端请求订阅码失败，提供的Mac、ProductId设备信息不存在
+    XLinkErrorCodeRequestSubCodeCloudFailDeviceInfoInvaild = 203902,
+    //云端订阅码订阅成功
+    XLinkErrorCodeSubscribeWithSubCodeCloudSuccess = 204101,
+    //云端订阅码订阅失败，云端执行订阅时发生错误
+    XLinkErrorCodeSubscribeWithSubCodeCloudFailSeverSubscribeFail = 204151,
+    //云端订阅码订阅失败，因产品配置限制导致订阅失败
+    XLinkErrorCodeSubscribeWithSubCodeCloudFailDeviceModeLimited = 204152,
     //任务超时
     XLinkErrorCodeTaskTimeout = 300101,
     //任务取消
@@ -377,6 +387,23 @@ typedef NS_ENUM(NSInteger, XLinkErrorCode) {
     XLinkErrorCodeApiThirdPartyOpenIdExistWb = 4001128,
     //服务端发生异常
     XLinkErrorCodeApiServiceException = 5031001,
+    
+    //发送订阅码成功
+    XLinkErrorCodeSendSubcodeLocalSuccess = 600601,
+    //设备拒绝被订阅
+    XLinkErrorCodeSendSubkeyLocalFailRefuse = 600602,
+    //设备解密出错，数据校验失败
+    XLinkErrorCodeSendSubkeyLocalFailDecrypt = 600603,
+    //设备配对次数达到上限
+    XLinkErrorCodeSendSubcodeFailReachPairingLimit = 600604,
+    //设备上报订阅码成功
+    XLinkErrorCodeSubcodeStateLocalSuccess = 600700,
+    //设备上报订阅码云端无法识别
+    XLinkErrorCodeSubcodeStateLocalSubcodeInvaild = 600701,
+    //设备上报订阅码已过期，过期仅在一定时间内有效，逾期无法识别
+    XLinkErrorCodeSubcodeStateLocalSubcodeExpired = 600702,
+    //设备上报订阅码中的APP ID与提交的APP ID无法匹配
+    XLinkErrorCodeSubcodeStateLocalAppidNotMatch = 600703,
 };
 
 /* XLinkErrorCode_h */

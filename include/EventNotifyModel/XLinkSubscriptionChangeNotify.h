@@ -19,14 +19,10 @@ typedef NS_ENUM(NSUInteger, SubscriptionChangeType) {
 
 @interface XLinkSubscriptionChangeNotify : NSObject
 
-/**
- 设备id
- */
+///设备id
 @property(copy, nonatomic) NSNumber *deviceId;
 
-/**
- 订阅关系变化类型
- */
+///订阅关系变化类型
 @property(assign, nonatomic) SubscriptionChangeType changeType;
 
 @end

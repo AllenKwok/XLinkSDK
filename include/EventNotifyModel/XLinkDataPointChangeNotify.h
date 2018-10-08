@@ -10,23 +10,16 @@
 #import "XLinkConst.h"
 
 NS_ASSUME_NONNULL_BEGIN
-/**
- 设备数据端点变化发送的通知
- */
+///设备数据端点变化发送的通知
 @interface XLinkDataPointChangeNotify : NSObject
 
-/**
- 变化数据端点的index
- */
+///变化数据端点的index
 @property(assign, nonatomic) NSUInteger index;
-/**
- 变化数据端点的数据
- */
+
+///变化数据端点的数据
 @property(copy, nonatomic) NSNumber *value;
 
-/**
- 管理台设置的报警内容
- */
+///管理台设置的报警内容
 @property(copy, nonatomic) NSString *alarmMessage;
 
 @end

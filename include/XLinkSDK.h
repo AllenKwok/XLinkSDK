@@ -123,45 +123,34 @@ typedef NS_ENUM(NSUInteger, LogoutReason) {
 
 @interface XLinkSDK : NSObject
 
-/**
- SDK云端连接状态回调
- */
+///SDK云端连接状态回调delegate
 @property(weak, nonatomic,nullable) id <XLinkCloudDelegate> cloudDelegate;
-/**
- SDK用户授权相关回调
- */
+
+///SDK用户授权相关回调delegate
 @property(weak, nonatomic,nullable) id <XLinkUserDelegate> userDelegate;
-/**
- SDK数据相关的delegate，包括接收到dataPoint的更新
- */
+
+///SDK数据相关的delegate，包括接收到dataPoint的更新
 @property(weak, nonatomic,nullable) id <XLinkDataDelegate> dataDelegate;
-/**
- SDK设备状态相关的delegate，包括设备在线离线状态和设备属性的变化
- */
+
+///SDK设备状态相关的delegate，包括设备在线离线状态和设备属性的变化
 @property(weak, nonatomic,nullable) id <XLinkDeviceStateDelegate> deviceStateDelegate;
-/**
- SDK全局的配置
- */
+
+///SDK全局的配置
 @property(strong, nonatomic ,nullable) XLinkConfig *xlinkConfig;
-/**
- SDK的dataPoint管理类
- */
+
+///SDK的dataPoint管理类
 @property(strong, nonatomic ,nullable) XLinkDataPointManager *dataPointManager;
-/**
- SDK的设备管理类
- */
+
+/// SDK的设备管理类
 @property(strong, nonatomic ,nullable) XDeviceManager *deviceManager;
-/**
- SDK的云端登陆状态
- */
+
+///SDK的云端登陆状态
 @property(assign, nonatomic) CloudConnectionState cloudState;
-/**
- 当前登陆的用户
- */
+
+///当前登陆的用户
 @property(strong, nonatomic ,nullable) XLinkUserModel *userModel;
-/**
- 用于判断sdk是否已经启动
- */
+
+///用于判断sdk是否已经启动
 @property(assign, nonatomic, getter = isStarted) BOOL started;
 
 /**
@@ -189,16 +178,14 @@ typedef NS_ENUM(NSUInteger, LogoutReason) {
 - (void)stop;
 
 /**
- 停止SDK, 断开云端连接，回收资源，清除授权信息。
+ 退出登陆状态，断开云端连接，回收资源，清除授权信息。
  */
-- (void)logoutAndStop;
+- (void)logout;
 
 /**
- 断开连接设备本地连接
-
- @param device 设备
+ 退出登陆状态，断开云端连接，回收当前用户资源，清除授权信息。
  */
-- (void)disconnectLocalWithDevice:(XDevice *)device;
+- (void)logoutAndStop;
 
 /**
  获取SDK版本号

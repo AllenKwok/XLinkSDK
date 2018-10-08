@@ -16,6 +16,11 @@
 #import "XLinkSubscriptionChangeNotify.h"
 #import "XLinkDeviceOnlineStateAlertNotify.h"
 #import "XLinkDeviceOnlineStateChangedNotify.h"
+#import "XLinkHomeMessageNotify.h"
+#import "XLinkHomeInviteNotify.h"
+#import "XLinkHomeDeviceAuthrizeChangedNotify.h"
+#import "XLinkHomeDeviceChangedNotify.h"
+#import "XLinkHomeMemberChangedNotify.h"
 #import "XLinkConst.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface EventNotifyHelper : NSObject
 
 /**
- 解析EventNotify
+ 解析EventNotify为NSDictionary
  
  @param data 原始的EventNotify数据
  @return EventNotify解析后的NSDictionary
@@ -45,8 +50,6 @@ NS_ASSUME_NONNULL_BEGIN
  @return 设备数据端点变换引起的报警model
  */
 + (XLinkDataPointAlertNotify *)parseDataPointAlertNotifyWithData:(NSData *)data;
-
-/** 设备管理员推送的分享消息*/
 
 /**
  设备管理员推送的分享消息
@@ -95,6 +98,47 @@ NS_ASSUME_NONNULL_BEGIN
  @return 设备在线状态变化引发的告警model
  */
 + (XLinkDeviceOnlineStateAlertNotify *)parseDeviceOnlineStateAlertNotifyWithData:(NSData *)data;
+
+
+/**
+ 家庭消息通知
+ 
+ @param data 原始的EventNotify数据
+ @return 家庭消息通知model
+ */
++ (XLinkHomeMessageNotify *)parseHomeMessageNotifyWithData:(NSData *)data;
+
+/**
+ 家庭邀请通知
+ 
+ @param data 原始的EventNotify数据
+ @return 家庭邀请通知model
+ */
++ (XLinkHomeInviteNotify *)parseHomeInviteNotifyWithData:(NSData *)data;
+
+/**
+ 家庭设备权限变化通知
+ 
+ @param data 原始的EventNotify数据
+ @return 家庭设备权限变化通知model
+ */
++ (XLinkHomeDeviceAuthrizeChangedNotify *)parseHomeDeviceAuthrizeChangedNotifyWithData:(NSData *)data;
+
+/**
+ 家庭成员变化通知
+ 
+ @param data 原始的EventNotify数据
+ @return 家庭成员变化通知model
+ */
++ (XLinkHomeMemberChangedNotify *)parseHomeMemberChangedNotifyWithData:(NSData *)data;
+
+/**
+ 家庭设备变化通知
+ 
+ @param data 原始的EventNotify数据
+ @return 家庭设备变化通知model
+ */
++ (XLinkHomeDeviceChangedNotify *)parseHomeDeviceChangedNotifyWithData:(NSData *)data;
 
 @end
 

@@ -12,35 +12,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XLinkHTTPConfig : NSObject
 
-
-/**
- 全局服务器地址
- */
+///全局服务器地址
 @property (nonatomic, copy, nullable) NSString *apiServer;
 
-/**
- 全局参数
- */
+///全局参数
 @property (nonatomic, strong, nullable) NSDictionary<NSString *, id> *parameters;
 
-/**
- 全局请求头
- */
+///全局请求头
 @property (nonatomic, strong, nullable) NSDictionary<NSString *, NSString *> *headers;
 
-/**
- 全局请求头
- */
+///全局请求头
 @property (nonatomic, copy, nonnull) NSString *corpId;
 
-/**
- 全局请求头
- */
+///全局请求头
 @property (nonatomic, assign) NSTimeInterval defaultTimeout;
 
-/**
- 回调线程，默认为主线程
- */
+///回调线程，默认为主线程
 @property (nonatomic, strong, nullable) dispatch_queue_t callbackQueue;
 
 @end

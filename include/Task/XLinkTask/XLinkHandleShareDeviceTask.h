@@ -20,28 +20,24 @@ typedef NS_ENUM(NSUInteger, XLinkHandleShareDeviceAction) {
 
 @interface XLinkHandleShareDeviceTask : XLinkTask
 
-/**
- 邀请码
- */
+///邀请码
 @property(copy, nonatomic) NSString *inviteCode;
 
-/**
- 处理的动作，接受或者取消
- */
+///处理的动作，接受或者取消
 @property(assign, nonatomic) XLinkHandleShareDeviceAction action;
 
 /**
- 创建处理分享设备Task
+ 构建处理分享设备任务
  
  @param inviteCode 分享邀请码
  @param action 处理的动作，接受或者取消
  @param completionHandler 完成后的回调
- @return 处理分享设备Task
+ @return XLinkHandleShareDeviceTask
  */
 + (instancetype)handleShareDeviceTaskWithInviteCode:(NSString *)inviteCode
                                   handleShareAction:(XLinkHandleShareDeviceAction)action
                                             timeout:(NSUInteger)timeout
-                                      completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+                                  completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
 @end
 
@@ -49,12 +45,12 @@ typedef NS_ENUM(NSUInteger, XLinkHandleShareDeviceAction) {
 @interface XLinkHandleShareDeviceTask (XLinkDeprecated)
 
 /**
- 创建处理分享设备Task
+ 构建处理分享设备任务
  
  @param inviteCode 分享邀请码
  @param action 处理的动作，接受或者取消
  @param completeBlock 完成后的回调
- @return 处理分享设备Task
+ @return XLinkHandleShareDeviceTask
  */
 + (instancetype)handleShareDeviceTaskWithInvitedCode:(NSString *)inviteCode
                                withHandleShareAction:(XLinkHandleShareDeviceAction)action

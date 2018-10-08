@@ -17,16 +17,11 @@ typedef void (^XLinkSyncDeviceListCompletionHandler)(NSArray <XDevice *> *device
 
 @interface XLinkSyncDeviceListTask : XLinkTask
 
-/**
- 设备列表版本号，默认为0
- */
+///设备列表版本号，默认为0
 @property(assign, nonatomic) int version;
 
-/**
- 同步列表完成后是否连接本地
- */
+///同步列表完成后是否连接本地
 @property(assign, nonatomic) BOOL connectLocal;
-
 
 
 /**
@@ -36,7 +31,7 @@ typedef void (^XLinkSyncDeviceListCompletionHandler)(NSArray <XDevice *> *device
  @param timeout 超时时间
  @param connectLocal 是否自动进行本地连接，默认 true
  @param completionHandler 完成后的回调
- @return task
+ @return XLinkSyncDeviceListTask
  */
 + (instancetype)syncDeviceListTaskWithVersion:(int)version
                                       timeout:(NSUInteger)timeout
@@ -56,7 +51,7 @@ typedef void (^XLinkSyncDeviceListCompletionHandler)(NSArray <XDevice *> *device
  @param timeout 超时时间
  @param connectLocal 是否自动进行本地连接，默认 true
  @param syncCompleteBlock 完成后的回调
- @return task
+ @return XLinkSyncDeviceListTask
  */
 + (instancetype)syncDeviceListTaskWithVersion:(int)version
                                   withTimeout:(NSUInteger)timeout

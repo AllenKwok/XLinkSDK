@@ -22,9 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XLinkRetryUntilTimeoutTask : XLinkBackoffTask <XLinkRetryUntilTimeoutTaskDataSource,XLinkTaskDataSource>
 
-/**
- task总的超时时间
- */
+/// task总的超时时间
 @property(assign, nonatomic) NSUInteger totalTimeout;
 
 @end

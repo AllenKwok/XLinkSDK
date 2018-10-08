@@ -24,8 +24,10 @@ typedef NS_ENUM(NSUInteger, DevicePropChangedType) {
 
 @interface XLinkDevicePropChangedNotify : NSObject
 
+///设备id
 @property(copy, nonatomic) NSNumber *deviceId;
 
+///设备属性变化类型
 @property(assign, nonatomic) DevicePropChangedType type;
 
 @end

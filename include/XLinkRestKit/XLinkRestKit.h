@@ -451,6 +451,46 @@ typedef NS_ENUM(NSUInteger, XLinkUserSource) {
                                     oauthSignature:(NSString * _Nullable)oauth_signature
                                  completionHandler:(XLinkRestCompletionHandler)handler;
 
+
+/**
+ 18 短信验证登录--发送手机验证码
+ 
+ @param phone 手机号
+ @param phoneZone 手机区号，不填则默认中国:+86
+ @param captcha 图片验证码
+ @param handler 完成后的回调
+ */
++ (void)sendVerifyCodeForUserAuthWithPhone:(NSString *)phone
+                                 phoneZone:(NSString * _Nullable)phoneZone
+                                   captcha:(NSString * _Nullable)captcha
+                         completionHandler:(XLinkRestCompletionHandler)handler;
+
+/**
+ 19 短信验证登录--请求或刷新发送短信的图片验证码
+ 
+ @param phone 手机号
+ @param phoneZone 手机区号，不填则默认中国:+86
+ @param handler 完成后的回调
+ */
++ (void)getCaptchaForUserAuthWithPhone:(NSString *)phone
+                             phoneZone:(NSString * _Nullable)phoneZone
+                     completionHandler:(XLinkRestCompletionHandler)handler;
+
+/**
+ 20 短信验证登录，可以是已注册的帐号或未注册的帐号的账号(如果未注册，则注册该账户)
+ 
+ @param verifyCode 短信验证码
+ @param phone 手机号
+ @param phoneZone 手机区号，不填则默认中国:+86
+ @param resource 登陆源
+ @param handler 完成后的回调
+ */
++ (void)authWithSmsVerifyCode:(NSString *)verifyCode
+                        phone:(NSString *)phone
+                    phoneZone:(NSString *)phoneZone
+                     resource:(NSString * _Nullable)resource
+            completionHandler:(XLinkRestCompletionHandler)handler;
+
 #pragma mark - 设备功能接口
 
 /**
@@ -597,19 +637,30 @@ typedef NS_ENUM(NSUInteger, XLinkUserSource) {
 
 
 /**
- 修改设备的属性
+ 修改设备名称
  
  @param pid 产品id
  @param deviceId 设备id
  @param name 设备名称
+ @param handler 完成后的回调
+ */
++ (void)modifyDeviceNameWithProductId:(NSString *)pid
+                             deviceId:(NSNumber *)deviceId
+                           deviceName:(NSString *)name
+                    completionHandler:(XLinkRestCompletionHandler)handler;
+
+/**
+ 修改设备的sn
+ 
+ @param pid 产品id
+ @param deviceId 设备id
  @param sn      设备序列号
  @param handler 完成后的回调
  */
-+ (void)modifyDevicePropertyWithProductId:(NSString *)pid
-                                 deviceId:(NSNumber *)deviceId
-                               deviceName:(NSString *)name
-                                 deviceSn:(NSString *)sn
-                        completionHandler:(XLinkRestCompletionHandler)handler;
++ (void)modifyDeviceSnWithProductId:(NSString *)pid
+                           deviceId:(NSNumber *)deviceId
+                           deviceSn:(NSString *)sn
+                  completionHandler:(XLinkRestCompletionHandler)handler;
 
 /**
  获取设备详细信息
@@ -667,6 +718,18 @@ typedef NS_ENUM(NSUInteger, XLinkUserSource) {
  */
 + (void)getDataPointMetaDataWithProductId:(NSString *)pid
                         completionHandler:(XLinkRestCompletionHandler)handler;
+
+
+/**
+ 查询设备的在线状态
+ 
+ @param uid 用户id
+ @param didArray 设备id数组
+ @param handler 完成后的回调
+ */
++ (void)queryDeviceCloudStateWithUserId:(NSNumber *)uid
+                          deviceIdArray:(NSArray <NSNumber *>*)didArray
+                      completionHandler:(XLinkRestCompletionHandler)handler;
 
 #pragma mark - 设备的配对信息
 

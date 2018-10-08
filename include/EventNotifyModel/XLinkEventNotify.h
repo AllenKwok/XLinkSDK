@@ -39,31 +39,21 @@ typedef NS_ENUM(NSUInteger, EventNotifyType) {
 };
 
 @interface XLinkEventNotify : NSObject
-/**
- 通知事件触发来源类型
- */
+
+///通知事件触发来源类型
 @property(nonatomic, assign) EventNotifyFromType fromType;
-/**
- notify来源
- */
+
+///notify来源
 @property(nonatomic, assign) uint32_t fromID;
 
-/**
- 消息类型
- */
+///消息类型
 @property(nonatomic, assign) EventNotifyType messageType;
 
-/**
- 通知事件标志
- */
+///通知事件标志
 @property(assign, nonatomic) EventNotifyFlag notifyFlag;
 
-/**
- 消息的原始数据
- */
+///消息的原始数据
 @property(nonatomic, copy) NSData *notifyData;
-
-
 
 @end
 

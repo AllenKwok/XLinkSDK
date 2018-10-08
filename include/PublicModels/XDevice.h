@@ -110,6 +110,9 @@ typedef NS_ENUM(uint8_t, XDeviceConnectionState) {
 /** 云端是否在线*/
 @property (assign, nonatomic) BOOL isCloudOnline;
 
+/** 是否支持订阅码订阅*/
+@property (assign, nonatomic,getter=isSupportSubByCode) BOOL supportSubByCode;
+
 /**
  返回DETACHED时，表示SDK尚未尝试过内网或者外网连接。
  返回OFFLINE时，表示SDK与设备无内外网连接

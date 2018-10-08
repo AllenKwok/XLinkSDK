@@ -16,18 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface XLinkDataPointAlertNotify : NSObject
 
-/**
- 变化数据端点的index
- */
+///变化数据端点的index
 @property(assign, nonatomic) NSUInteger index;
-/**
- 变化数据端点的数据
- */
+
+///变化数据端点的数据
 @property(copy, nonatomic) NSNumber *value;
 
-/**
- 管理台设置的报警内容
- */
+///管理台设置的报警内容
 @property(copy, nonatomic) NSString *alarmMessage;
 
 @end

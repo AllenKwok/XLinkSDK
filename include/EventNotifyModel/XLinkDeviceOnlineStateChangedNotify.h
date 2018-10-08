@@ -11,19 +11,13 @@
 #import "XLinkConst.h"
 
 NS_ASSUME_NONNULL_BEGIN
-/**
- 设备在线状态变化引发的通知
- */
+///设备在线状态变化引发的通知
 @interface XLinkDeviceOnlineStateChangedNotify : NSObject
 
-/**
- 设备id
- */
+///设备id
 @property(copy, nonatomic) NSNumber *deviceId;
 
-/**
- 设备在线状态
- */
+///设备在线状态
 @property(assign, nonatomic) DeviceOnlineState state;
 
 @end

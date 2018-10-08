@@ -18,22 +18,20 @@ typedef void (^XLinkGetDataPointTaskCompletionHandler)(NSArray <XLinkDataPoint *
 
 @interface XLinkGetDataPointTask : XLinkSendPolicyTask
 
-/**
- 要获取数据端点的设备
- */
+///要获取数据端点的设备
 @property(strong, nonatomic) XDevice *device;
 
 /**
- 新建获取数据端点的任务
+ 构建获取数据端点的任务
  
  @param device 设备
  @param timeout 设置超时时间，单位秒，建议10秒
  @param completionHandler 完成后的回调
- @return 任务
+ @return XLinkGetDataPointTask
  */
 + (instancetype)getDataPointTaskWithDevice:(XDevice *)device
                                    timeout:(NSUInteger)timeout
-                             completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+                         completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
 @end
 
@@ -41,12 +39,12 @@ typedef void (^XLinkGetDataPointTaskCompletionHandler)(NSArray <XLinkDataPoint *
 @interface XLinkGetDataPointTask (XLinkDeprecated)
 
 /**
- 新建获取数据端点的任务
+ 构建获取数据端点的任务
  
  @param device 设备
  @param timeout 设置超时时间，单位秒，建议10秒
  @param completeBlock 完成后的回调
- @return 任务
+ @return XLinkGetDataPointTask
  */
 + (instancetype)getDataPointTaskWithDevice:(XDevice *)device
                                withTimeOut:(NSUInteger)timeout

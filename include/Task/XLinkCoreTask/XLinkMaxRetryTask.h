@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @interface XLinkMaxRetryTask : XLinkTask
 
+///最大重试次数
 @property(assign, nonatomic) NSUInteger maxRetryCount;
 
 @end

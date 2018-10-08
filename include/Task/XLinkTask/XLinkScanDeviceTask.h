@@ -15,24 +15,20 @@ typedef void (^XLinkDidDiscoveredDeviceHandler)(XDevice *device);
 
 @interface XLinkScanDeviceTask : XLinkRetryUntilTimeoutTask
 
-/**
- 要扫描设备的productID数组
- */
+///要扫描设备的productID数组
 @property(copy, nonatomic) NSArray *productIdArray;
 
-/**
- 扫描到设备后回调
- */
+///扫描到设备后回调
 @property(copy, nonatomic,nullable) XLinkDidDiscoveredDeviceHandler discoveredDeviceHandler;
 
 /**
- 新建扫描设备任务
+ 构建扫描设备任务
  
  @param pidArray productID数组
  @param timeout 设置超时，单位毫秒，默认90秒
  @param discoveredDeviceHandler 搜索到设备的回调
  @param completionHandler 搜索完成的回调
- @return 设备任务
+ @return XLinkScanDeviceTask
  */
 + (instancetype)scanDeviceTaskWithProductIdArray:(NSArray *)pidArray
                                          timeout:(NSUInteger)timeout
@@ -46,13 +42,13 @@ typedef void (^XLinkDidDiscoveredDeviceHandler)(XDevice *device);
 @interface XLinkScanDeviceTask (XLinkDeprecated)
 
 /**
- 新建扫描设备任务
+ 构建扫描设备任务
  
  @param pidArray productID数组
  @param timeout 设置超时，单位毫秒，默认90秒
  @param gotDeviceBlock 搜索到设备的回调
  @param completeBlock 搜索完成的回调
- @return 设备任务
+ @return XLinkScanDeviceTask
  */
 + (instancetype)scanDeviceTaskWithProductIds:(NSArray *)pidArray
                                  withTimeOut:(NSUInteger)timeout

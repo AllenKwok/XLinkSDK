@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XLinkDataPointManager : NSObject
 
+///所有的监听类对象
+@property(strong, nonatomic, readonly) NSMutableArray <XLinkDataPointObserver *> *observerArray;
+
 /**
  单例对象
  
@@ -23,32 +26,27 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)shareManager;
 
 /**
- 停止管理，清除所有缓存
+ 停止数据端点上报监听管理，清除所有缓存
  */
 - (void)stopManage;
 
 /**
- 所有的监听类对象
- */
-@property(strong, nonatomic, readonly) NSMutableArray <XLinkDataPointObserver *> *observerArray;
-
-/**
- 添加一个dataPoint的监听
+ 添加一个数据端点上报监听
  
- @param dataPointObserver dataPoint的监听
+ @param dataPointObserver 数据端点上报监听
  */
 - (void)addDataPointObserver:(XLinkDataPointObserver *)dataPointObserver;
 
 /**
- 移除一个dataPoint的监听
+ 移除一个数据端点上报监听
  
- @param dataPointObserver dataPoint的监听
+ @param dataPointObserver 数据端点上报监听
  */
 - (void)removeDataPointObserver:(XLinkDataPointObserver *)dataPointObserver;
 
 
 /**
- 移除某个设备所有dataPoint的监听
+ 移除某个设备所有数据端点上报监听
  
  @param device 设备实体
  */

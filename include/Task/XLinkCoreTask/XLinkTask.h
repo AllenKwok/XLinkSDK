@@ -76,47 +76,36 @@ typedef void (^XLinkTaskDidCompletionHandler)( id _Nullable result, NSError *_Nu
 typedef void (^XLinkTaskDidTimeoutHandler)(void);
 
 @interface XLinkTask : NSObject <XLinkTaskDataSource>
-/**
- 是否已启动
- */
+///是否已启动
 @property(assign, nonatomic) BOOL isStarted;
-/**
- 是否已经超时
- */
+
+///是否已经超时
 @property(assign, nonatomic) BOOL isTimeout;
-/**
- 是否已经完成
- */
+
+///是否已经完成
 @property(assign, nonatomic) BOOL isComplete;
-/**
- *  默认0s
- */
+
+///默认0s
 @property(assign, nonatomic) NSUInteger timeout;
 
-/**
- 当前的重试次数
- */
+///当前的重试次数
 @property(assign, nonatomic) NSUInteger currentRetryCount;
 
-/**
- 任务返回的结果
- */
+///任务返回的结果
 @property(strong, nonatomic ,nullable) id result;
+
+///任务返回的错误
 @property(strong, nonatomic ,nullable) NSError *error;
 
 
 #pragma mark - callback
-/**
- task开始的回调
- */
+///task开始的回调
 @property (copy, nonatomic ,nullable) XLinkTaskDidStartHandler taskDidStartHandler;
-/**
- task完成的回调
- */
+
+///task完成的回调
 @property (copy, nonatomic ,nullable) XLinkTaskDidCompletionHandler taskDidCompletionHandler;
-/**
- task超时的回调
- */
+
+///task超时的回调
 @property (copy, nonatomic ,nullable) XLinkTaskDidTimeoutHandler taskDidTimeoutHandler;
 
 #pragma mark - 外部函数
@@ -132,17 +121,11 @@ typedef void (^XLinkTaskDidTimeoutHandler)(void);
 - (void)cancel;
 
 #pragma mark - 以下是废弃属性
-/**
- task开始的回调
- */
+///task开始的回调
 @property(copy, nonatomic,nullable) OnTaskStartBlock taskStartBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已过期, 用taskDidStartHandler替换");
-/**
- task完成的回调
- */
+///task完成的回调
 @property(copy, nonatomic,nullable) OnTaskCompleteBlock taskCompleteBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已过期, 用taskDidCompletionHandler替换");
-/**
- 任务超时之后的回调
- */
+///任务超时之后的回调
 @property(copy, nonatomic,nullable) TimeoutBlock timeoutBlock
 NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已过期, 用taskDidTimeoutHandler替换");
 #pragma mark - 以上是废弃属性

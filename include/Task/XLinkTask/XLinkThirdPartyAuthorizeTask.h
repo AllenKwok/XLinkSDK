@@ -6,7 +6,7 @@
 //  Copyright © 2017年 www.xlink.cn. All rights reserved.
 //
 
-#import "XLinkTask.h"
+#import "XLinkAuthorizeBaseTask.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,41 +22,29 @@ typedef NS_ENUM(NSUInteger, XLinkUserSourceType) {
     XLinkUserSourceTypeOthers = 10,//其它遵循xlink统一身份认证规范的用户来源
 };
 
-typedef void (^XLinkUserAuthorizeTaskCompletionHandler)(id result, NSError *err);
+@interface XLinkThirdPartyAuthorizeTask : XLinkAuthorizeBaseTask
 
-@interface XLinkThirdPartyAuthorizeTask : XLinkTask
-
-
-/**
- 企业ID，默认值为nil。
- */
+///企业ID，默认值为nil。
 @property(copy, nonatomic) NSString *corpId;
 
-/**
- 用户来源，默认值为0。如果使用第三方账号登陆，参照XLinkUserSourceType填入对应的类型。
- */
+///用户来源，默认值为0。如果使用第三方账号登陆，参照XLinkUserSourceType填入对应的类型。
 @property(assign, nonatomic) XLinkUserSourceType sourceType;
 
-/**
- 第三方账号openid。
- */
+///第三方账号openid。
 @property(copy, nonatomic) NSString *openId;
 
-/**
- 第三方账号授权凭证。
- */
+///第三方账号授权凭证。
 @property(copy, nonatomic) NSString *accessToken;
 
-/**
- 第三方账号昵称。
- */
+///第三方账号昵称。
 @property(copy, nonatomic) NSString *nickNmae;
 
+///国外的第三方账号的登录内容
 @property(strong, nonatomic) NSDictionary *content;
 
 
 /**
- 新建第三方用户登陆任务
+ 构建第三方用户登陆任务
  
  @param userSourceType 用户来源
  @param openid 第三方账号openid
@@ -64,7 +52,7 @@ typedef void (^XLinkUserAuthorizeTaskCompletionHandler)(id result, NSError *err)
  @param nickName 第三方账号昵称
  @param cropId 企业ID
  @param completionHandler 完成回调
- @return task
+ @return XLinkThirdPartyAuthorizeTask
  */
 + (instancetype)thirdPartyUserAuthorizeTaskWithSource:(XLinkUserSourceType)userSourceType
                                                openId:(NSString *)openid
@@ -75,12 +63,12 @@ typedef void (^XLinkUserAuthorizeTaskCompletionHandler)(id result, NSError *err)
                                     completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
 /**
- 新建外国的第三方用户（如Twitter，Facebook）登陆任务
+ 构建外国的第三方用户（如Twitter，Facebook）登陆任务
  
  @param content 第三方账号信息
  @param cropId 企业ID
  @param completionHandler 完成回调
- @return task
+ @return XLinkThirdPartyAuthorizeTask
  */
 + (instancetype)thirdForeignUserAuthorizeTaskWithContent:(NSDictionary *)content
                                                   cropId:(NSString *)cropId
@@ -93,7 +81,7 @@ typedef void (^XLinkUserAuthorizeTaskCompletionHandler)(id result, NSError *err)
 @interface XLinkThirdPartyAuthorizeTask (XLinkDeprecated)
 
 /**
- 新建第三方用户登陆任务
+ 构建第三方用户登陆任务
  
  @param userSourceType 用户来源
  @param openid 第三方账号openid
@@ -101,7 +89,7 @@ typedef void (^XLinkUserAuthorizeTaskCompletionHandler)(id result, NSError *err)
  @param nickName 第三方账号昵称
  @param cropId 企业ID
  @param completeBlock 完成回调
- @return task
+ @return XLinkThirdPartyAuthorizeTask
  */
 + (instancetype)thirdPartyUserAuthorizeTaskWithSource:(XLinkUserSourceType)userSourceType
                                            withOpenId:(NSString *)openid
@@ -109,20 +97,20 @@ typedef void (^XLinkUserAuthorizeTaskCompletionHandler)(id result, NSError *err)
                                          withNickName:(NSString *)nickName
                                            withCropId:(NSString *)cropId
                                           withTimeout:(NSUInteger)timeout
-                                    withCompleteBlock:(XLinkUserAuthorizeTaskCompletionHandler)completeBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，请使用+thirdPartyUserAuthorizeTaskWithSource:(XLinkUserSourceType)userSourceType openId:accessToken:nickName:cropId:imeout:completeBlock:替换,以后的版本将可能会删除此方法");
+                                    withCompleteBlock:(XLinkTaskDidCompletionHandler)completeBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，请使用+thirdPartyUserAuthorizeTaskWithSource:(XLinkUserSourceType)userSourceType openId:accessToken:nickName:cropId:imeout:completeBlock:替换,以后的版本将可能会删除此方法");
 
 /**
- 新建外国的第三方用户（如Twitter，Facebook）登陆任务
+ 构建外国的第三方用户（如Twitter，Facebook）登陆任务
  
  @param content 第三方账号信息
  @param cropId 企业ID
  @param completeBlock 完成回调
- @return task
+ @return XLinkThirdPartyAuthorizeTask
  */
 + (instancetype)thirdForeignUserAuthorizeTaskWithContent:(NSDictionary *)content
                                               withCropId:(NSString *)cropId
                                              withTimeout:(NSUInteger)timeout
-                                       withCompleteBlock:(XLinkUserAuthorizeTaskCompletionHandler)completeBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，请使用+thirdForeignUserAuthorizeTaskWithContent:cropId:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
+                                       withCompleteBlock:(XLinkTaskDidCompletionHandler)completeBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，请使用+thirdForeignUserAuthorizeTaskWithContent:cropId:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
 
 @end
 NS_ASSUME_NONNULL_END

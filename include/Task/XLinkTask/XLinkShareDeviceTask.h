@@ -24,39 +24,27 @@ typedef void (^XLinkShareDeviceTaskCompletionHandler)(NSDictionary *result, XLin
 
 @interface XLinkShareDeviceTask : XLinkTask
 
-/**
- 设备
- */
+///设备
 @property(strong, nonatomic) XDevice *device;
 
-/**
- 对方账号（邮箱或者手机号）
- */
+///对方账号（邮箱或者手机号）
 @property(copy, nonatomic) NSString *account;
 
-/**
- 用户来源，第三方来源用户需要填
- */
+///用户来源，第三方来源用户需要填
 @property(assign, nonatomic) XLinkUserSourceType sourceType;
 
-/**
- 分享的方式
- */
+///分享的方式
 @property(assign, nonatomic) XLinkShareDeviceMode shareDeviceMode;
 
-/**
- 过期时间（单位秒）
- */
+///过期时间（单位秒）
 @property(copy, nonatomic) NSString *expired;
 
-/**
- 对设备的控制权限，R可读，W可写，RW可读可写；默认为null相当于RW；
- */
+///对设备的控制权限，R可读，W可写，RW可读可写；默认为null相当于RW；
 @property(copy, nonatomic) NSString *authority;
 
 
 /**
- 新建通过账号分享设备任务
+ 构建通过账号分享设备任务
  
  @param device 设备
  @param account 对方账号（邮箱或者手机号）
@@ -65,7 +53,7 @@ typedef void (^XLinkShareDeviceTaskCompletionHandler)(NSDictionary *result, XLin
  @param authority 对设备的控制权限，R可读，W可写，RW可读可写；默认为null相当于RW；
  @param timeout task超时时间
  @param completionHandler 完成后的回调
- @return task
+ @return XLinkShareDeviceTask
  */
 + (instancetype)shareDeviceTaskWithDevice:(XDevice *)device
                                   account:(NSString *)account
@@ -73,10 +61,10 @@ typedef void (^XLinkShareDeviceTaskCompletionHandler)(NSDictionary *result, XLin
                                 shareMode:(XLinkShareDeviceMode)shareDeviceMode
                                 authority:(NSString *)authority
                                   timeout:(NSUInteger)timeout
-                            completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+                        completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
 /**
- 新建通过openId分享设备任务
+ 构建通过openId分享设备任务
  
  @param device 设备
  @param openId 对方openId
@@ -86,7 +74,7 @@ typedef void (^XLinkShareDeviceTaskCompletionHandler)(NSDictionary *result, XLin
  @param authority 对设备的控制权限，R可读，W可写，RW可读可写；默认为null相当于RW；
  @param timeout task超时时间
  @param completionHandler 完成后的回调
- @return task
+ @return XLinkShareDeviceTask
  */
 + (instancetype)shareDeviceTaskWithDevice:(XDevice *)device
                                    openId:(NSString *)openId
@@ -95,7 +83,7 @@ typedef void (^XLinkShareDeviceTaskCompletionHandler)(NSDictionary *result, XLin
                                 shareMode:(XLinkShareDeviceMode)shareDeviceMode
                                 authority:(NSString *)authority
                                   timeout:(NSUInteger)timeout
-                            completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+                        completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
 @end
 
@@ -103,7 +91,7 @@ typedef void (^XLinkShareDeviceTaskCompletionHandler)(NSDictionary *result, XLin
 @interface XLinkShareDeviceTask (XLinkDeprecated)
 
 /**
- 新建通过账号分享设备任务
+ 构建通过账号分享设备任务
  
  @param device 设备
  @param account 对方账号（邮箱或者手机号）
@@ -112,7 +100,7 @@ typedef void (^XLinkShareDeviceTaskCompletionHandler)(NSDictionary *result, XLin
  @param authority 对设备的控制权限，R可读，W可写，RW可读可写；默认为null相当于RW；
  @param timeout task超时时间
  @param shareCompleteBlock 完成后的回调
- @return task
+ @return XLinkShareDeviceTask
  */
 + (instancetype)shareDeviceTaskWithDevice:(XDevice *)device
                               withAccount:(NSString *)account
@@ -123,7 +111,7 @@ typedef void (^XLinkShareDeviceTaskCompletionHandler)(NSDictionary *result, XLin
          withShareDeviceTaskCompleteBlock:(XLinkShareDeviceTaskCompletionHandler)shareCompleteBlock NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, "已废弃方法，使用+shareDeviceTaskWithDevice:account:expired:shareMode:authority:timeout:completeBlock:替换,以后的版本将可能会删除此方法");
 
 /**
- 新建通过openId分享设备任务
+ 构建通过openId分享设备任务
  
  @param device 设备
  @param openId 对方openId
@@ -133,7 +121,7 @@ typedef void (^XLinkShareDeviceTaskCompletionHandler)(NSDictionary *result, XLin
  @param authority 对设备的控制权限，R可读，W可写，RW可读可写；默认为null相当于RW；
  @param timeout task超时时间
  @param shareCompleteBlock 完成后的回调
- @return task
+ @return XLinkShareDeviceTask
  */
 + (instancetype)shareDeviceTaskWithDevice:(XDevice *)device
                                withOpenId:(NSString *)openId

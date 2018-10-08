@@ -16,18 +16,14 @@ typedef void (^DeviceStateChangedBlock)(XDevice *device, XDeviceConnectionState 
 
 @interface XDeviceStateObserver : NSObject
 
-/**
- 要监听状态变化的设备
- */
+///要监听状态变化的设备
 @property(strong, nonatomic) XDevice *device;
 
-/**
- 监听到设备状态变化的回调
- */
+///监听到设备状态变化的回调
 @property(copy, nonatomic) DeviceStateChangedBlock block;
 
 /**
- 新建设备状态变化的监听类
+ 构建设备状态变化的监听类
  
  @param device 要监听状态变化的设备
  @param block 监听到设备状态变化的回调
@@ -42,7 +38,7 @@ typedef void (^DeviceStateChangedBlock)(XDevice *device, XDeviceConnectionState 
 @interface XDeviceStateObserver (XLinkDeprecated)
 
 /**
- 新建设备状态变化的监听类
+ 构建设备状态变化的监听类
  
  @param device 要监听状态变化的设备
  @param block 监听到设备状态变化的回调

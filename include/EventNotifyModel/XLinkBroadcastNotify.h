@@ -11,39 +11,25 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- 厂商推送的消息广播 
- */
+///厂商推送的消息广播
 @interface XLinkBroadcastNotify : NSObject
 
-/**
- 消息类型，暂时只有txt
- */
+///消息类型，暂时只有txt
 @property(copy, nonatomic) NSString *messageType;
 
-/**
- url/command
- */
+///url/command
 @property(copy, nonatomic) NSString *actionType;
 
-/**
- 如果action_type是url时的参数
- */
+///如果action_type是url时的参数
 @property(copy, nonatomic) NSString *url;
 
-/**
- 用户自定义动作,如果action_type是command时的参数；
- */
+///用户自定义动作,如果action_type是command时的参数；
 @property(copy, nonatomic) NSString *command;
 
-/**
- 消息标题，UTF-8
- */
+///消息标题，UTF-8
 @property(copy, nonatomic) NSString *title;
 
-/**
- 消息内容，UTF-8
- */
+///消息内容，UTF-8
 @property(copy, nonatomic) NSString *content;
 
 @end

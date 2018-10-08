@@ -14,29 +14,19 @@ NS_ASSUME_NONNULL_BEGIN
 @interface XLinkUserModel : NSObject
 
 #pragma mark - 用户基础信息
-/**
- 用户ID
- */
+///用户ID
 @property(copy, nonatomic) NSNumber *user_id;
 
-/**
- 调用凭证
- */
+///调用凭证
 @property(copy, nonatomic) NSString *access_token;
 
-/**
- 刷新凭证
- */
+///刷新凭证
 @property(copy, nonatomic) NSString *refresh_token;
 
-/**
- 有效期（秒）
- */
+///有效期（秒）
 @property(copy, nonatomic) NSNumber *expire_in;
 
-/**
- 用户认证码
- */
+///用户认证码
 @property(copy, nonatomic) NSString *authorize;
 
 

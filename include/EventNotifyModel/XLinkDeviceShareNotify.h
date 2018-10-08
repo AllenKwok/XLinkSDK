@@ -24,19 +24,13 @@ typedef NS_ENUM(NSUInteger, DeviceShareState) {
 
 @interface XLinkDeviceShareNotify : NSObject
 
-/**
- 要分享的设备id
- */
+///要分享的设备id
 @property(copy, nonatomic) NSNumber *deviceId;
 
-/**
- 要分享的设备码
- */
+///要分享的设备码
 @property(copy, nonatomic) NSNumber *inviteCode;
 
-/**
- 分享的状态
- */
+///分享的状态
 @property(assign, nonatomic) DeviceShareState shareState;
 
 @end

@@ -21,14 +21,10 @@ typedef NS_ENUM(NSUInteger, DeviceOnlineState) {
 
 @interface XLinkDeviceOnlineStateAlertNotify : NSObject
 
-/**
- 设备id
- */
+///设备id
 @property(copy, nonatomic) NSNumber *deviceId;
 
-/**
- 设备在线状态
- */
+///设备在线状态
 @property(assign, nonatomic) DeviceOnlineState state;
 
 @end

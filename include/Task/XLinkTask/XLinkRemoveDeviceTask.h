@@ -13,18 +13,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface XLinkRemoveDeviceTask : XLinkRetryUntilTimeoutTask
 
-/**
- 要删除的设备
- */
+///要删除的设备
 @property(strong, nonatomic) XDevice *device;
 
 /**
- 新建删除设备任务
+ 构建删除设备任务
  
- @param device 要添加的设备
+ @param device 要删除的设备
  @param timeout 设置超时，单位秒，默认90秒
  @param completionHandler 任务完成后回调
- @return XLinkAddDeviceTask
+ @return XLinkRemoveDeviceTask
  */
 + (instancetype)removeDeviceTaskWithDevice:(XDevice *)device
                                    timeout:(NSUInteger)timeout
@@ -37,12 +35,12 @@ NS_ASSUME_NONNULL_BEGIN
 //以下是废弃的方法，不建议使用，不久的将来会删除
 @interface XLinkRemoveDeviceTask (XLinkDeprecated)
 /**
- 新建删除设备任务
+ 构建删除设备任务
  
- @param device 要添加的设备
+ @param device 要删除的设备
  @param timeout 设置超时，单位秒，默认90秒
  @param completeBlock 任务完成后回调
- @return XLinkAddDeviceTask
+ @return XLinkRemoveDeviceTask
  */
 + (instancetype)removeDeviceTaskWithDevice:(XDevice *)device
                                withTimeOut:(NSUInteger)timeout
