@@ -39,6 +39,19 @@ typedef NS_ENUM(NSUInteger, XLinkHandleShareDeviceAction) {
                                             timeout:(NSUInteger)timeout
                                   completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
+/**
+ 构建处理分享设备任务 并启动
+ 
+ @param inviteCode 分享邀请码
+ @param action 处理的动作，接受或者取消
+ @param completionHandler 完成后的回调
+ @return XLinkHandleShareDeviceTask
+ */
++ (instancetype)scheduledHandleShareDeviceTaskWithInviteCode:(NSString *)inviteCode
+                                           handleShareAction:(XLinkHandleShareDeviceAction)action
+                                                     timeout:(NSUInteger)timeout
+                                           completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+
 @end
 
 //以下是废弃的方法，不建议使用，不久的将来会删除

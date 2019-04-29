@@ -28,6 +28,12 @@ typedef NS_ENUM(uint8_t, XLinkDataType) {
 
 @interface XLinkDataPoint : NSObject
 
+//数据端点id
+@property (nonatomic, copy) NSString *dataPointId;
+
+//是否系统数据端点
+@property BOOL isSystem;
+
 ///数据端点值数据类型
 @property(assign, nonatomic) XLinkDataType type;
 
@@ -84,6 +90,12 @@ typedef NS_ENUM(uint8_t, XLinkDataType) {
  */
 @property (assign, nonatomic) uint16_t source;
 
+//UI可见(远程控制可见"control": true,设备状态可见"state": true)
+@property (nonatomic, copy) NSDictionary *uiVisible;
+
+//字段名称
+@property (nonatomic, copy) NSString *fieldName;
+
 /**
  *  通过字典还原成数据端点实体
  *
@@ -99,6 +111,14 @@ typedef NS_ENUM(uint8_t, XLinkDataType) {
  *  @return 数据端点属性字典
  */
 - (NSDictionary *)getDictionaryFormat;
+
+/**
+ 比较两个数据端点是否为同一数据端点
+ 
+ @param dataPoint 需要比较的数据端点
+ @return 比较结果
+ */
+- (BOOL)isEqualToDataPoint:(XLinkDataPoint *)dataPoint;
 
 @end
 

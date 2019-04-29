@@ -28,6 +28,18 @@ NS_ASSUME_NONNULL_BEGIN
                                    timeout:(NSUInteger)timeout
                              completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
+/**
+ 构建删除设备任务 并启动
+ 
+ @param device 要删除的设备
+ @param timeout 设置超时，单位秒，默认90秒
+ @param completionHandler 任务完成后回调
+ @return XLinkRemoveDeviceTask
+ */
++ (instancetype)scheduledRemoveDeviceTaskWithDevice:(XDevice *)device
+                                            timeout:(NSUInteger)timeout
+                                  completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+
 
 @end
 

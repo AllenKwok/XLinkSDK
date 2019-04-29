@@ -27,6 +27,18 @@ typedef void (^XLinkGetDeviceTaskCompletionHandler)(NSArray <XDevice *> *devices
                                      timeout:(NSUInteger)timeout
                            completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
+/**
+ 构建获取设备列表任务 并启动
+ 
+ @param version 版本号，默认值为0
+ @param timeout 超时时间
+ @param completionHandler 完成后回调
+ @return XLinkGetDeviceListTask
+ */
++ (instancetype)scheduledGetDeviceListTaskWithVersion:(int)version
+                                              timeout:(NSUInteger)timeout
+                                    completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+
 @end
 
 

@@ -57,6 +57,40 @@ NS_ASSUME_NONNULL_BEGIN
                                    timeout:(NSUInteger)timeout
                          completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
+/**
+ 构建用户使用账号密码登陆任务 并启动
+ 
+ @param account 账号
+ @param password 密码
+ @param cropId 企业id
+ @param timeout 设置超时时间，单位秒，建议15秒
+ @param completionHandler 完成后的回调
+ @return XLinkUserAuthorizeTask
+ */
++ (instancetype)scheduledUserAuthorizeTaskWithAccount:(NSString *)account
+                                             password:(NSString *)password
+                                               cropId:(NSString *)cropId
+                                              timeout:(NSUInteger)timeout
+                                    completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+
+
+/**
+ 构建使用手机号进行授权任务 并启动
+ 
+ @param phone 手机
+ @param phoneZone 手机区号
+ @param password 密码
+ @param cropId 企业ID
+ @param timeout 超时时间
+ @param completionHandler 完成后的回调
+ */
++ (instancetype)scheduledUserAuthorizeTaskWithPhone:(NSString *)phone
+                                          phoneZone:(NSString *_Nullable)phoneZone
+                                           password:(NSString *)password
+                                             cropId:(NSString *)cropId
+                                            timeout:(NSUInteger)timeout
+                                  completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+
 
 
 @end

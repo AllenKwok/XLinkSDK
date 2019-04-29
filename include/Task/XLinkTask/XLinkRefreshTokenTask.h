@@ -27,6 +27,18 @@ NS_ASSUME_NONNULL_BEGIN
                                                     timeout:(NSUInteger)timeout
                                           completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
+/**
+ 构建根据授权信息登录任务 并启动
+ 
+ @param authorizeDic 授权信息
+ @param timeout 超时时间
+ @param completionHandler 完成后的回调
+ @return XLinkRefreshTokenAuthorizeTask
+ */
++ (instancetype)scheduledRefreshTokenTaskWithUserAuthorizeDictionary:(NSDictionary *)authorizeDic
+                                                             timeout:(NSUInteger)timeout
+                                                   completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+
 @end
 
 NS_ASSUME_NONNULL_END

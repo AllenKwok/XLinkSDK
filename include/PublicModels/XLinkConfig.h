@@ -24,6 +24,7 @@ typedef NS_ENUM(NSUInteger, XLinkSendDataPolicy) {
 };
 
 
+
 typedef NS_OPTIONS(NSUInteger, XLinkSupportVersion) {
     XLinkSupportVersionV5 = 1 << 0,//v5协议版本
     XLinkSupportVersionV6 = 1 << 1,//v6协议版本
@@ -44,6 +45,8 @@ typedef NS_OPTIONS(NSUInteger, XLinkSupportVersion) {
 ///云端keepAlive时间，默认为60秒,最小值为20秒。
 @property(assign, nonatomic) NSUInteger keepAliveInterval;
 
+///云端连接时Client的版本号，一般不需要特殊设置。
+@property (assign, nonatomic) NSUInteger MQTTClientVersion;
 
 #pragma mark - 发送数据配置
 

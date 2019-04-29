@@ -85,6 +85,48 @@ typedef void (^XLinkShareDeviceTaskCompletionHandler)(NSDictionary *result, XLin
                                   timeout:(NSUInteger)timeout
                         completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
+/**
+ 构建通过账号分享设备任务 并启动
+ 
+ @param device 设备
+ @param account 对方账号（邮箱或者手机号）
+ @param expired 分享有效期时间（单位秒）
+ @param shareDeviceMode 分享的方式
+ @param authority 对设备的控制权限，R可读，W可写，RW可读可写；默认为null相当于RW；
+ @param timeout task超时时间
+ @param completionHandler 完成后的回调
+ @return XLinkShareDeviceTask
+ */
++ (instancetype)scheduledShareDeviceTaskWithDevice:(XDevice *)device
+                                           account:(NSString *)account
+                                           expired:(NSString *)expired
+                                         shareMode:(XLinkShareDeviceMode)shareDeviceMode
+                                         authority:(NSString *)authority
+                                           timeout:(NSUInteger)timeout
+                                 completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+
+/**
+ 构建通过openId分享设备任务 并启动
+ 
+ @param device 设备
+ @param openId 对方openId
+ @param sourceType 账号来源
+ @param expired 分享有效期时间（单位秒）
+ @param shareDeviceMode 分享的方式
+ @param authority 对设备的控制权限，R可读，W可写，RW可读可写；默认为null相当于RW；
+ @param timeout task超时时间
+ @param completionHandler 完成后的回调
+ @return XLinkShareDeviceTask
+ */
++ (instancetype)scheduledShareDeviceTaskWithDevice:(XDevice *)device
+                                            openId:(NSString *)openId
+                                        sourceType:(XLinkUserSourceType)sourceType
+                                           expired:(NSString *)expired
+                                         shareMode:(XLinkShareDeviceMode)shareDeviceMode
+                                         authority:(NSString *)authority
+                                           timeout:(NSUInteger)timeout
+                                 completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+
 @end
 
 //以下是废弃的方法，不建议使用，不久的将来会删除

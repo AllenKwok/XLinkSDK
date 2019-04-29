@@ -824,6 +824,35 @@ typedef NS_ENUM(NSUInteger, XLinkUserSource) {
                                propertyKey:(NSString *)key
                          completionHandler:(XLinkRestCompletionHandler)handler;
 
+/**
+ 注册阿里推送
+ 
+ @param userId 用户id
+ @param appId 推送应用id，需要在云智易管理台创建
+ @param aliDeviceId 阿里推送返回的设备标签-[CloudPushSDK getDeviceId]
+ @param isNoticed 阿里推送设置--是否为通知
+ @param isDev iOS通知环境，YES表示在调试环境，NO表示在发布环境
+ @param handler 完成后的回调
+ */
++ (void)alipushRegisterWithUserId:(NSNumber *)userId
+                            appId:(NSString *)appId
+                      aliDeviceId:(NSString *)aliDeviceId
+                        isNoticed:(BOOL)isNoticed
+                 isDevEnvironment:(BOOL)isDev
+                completionHandler:(XLinkRestCompletionHandler)handler;
+
+
+/**
+ 注销阿里推送
+ 
+ @param userId 用户id
+ @param appId 推送应用id，需要在云智易管理台创建
+ @param handler 完成后的回调
+ */
++ (void)alipushUnRegisterWithUserId:(NSNumber *)userId
+                              appId:(NSString *)appId
+                  completionHandler:(XLinkRestCompletionHandler)handler;
+
 @end
 
 NS_ASSUME_NONNULL_END

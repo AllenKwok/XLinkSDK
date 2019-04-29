@@ -107,7 +107,7 @@ typedef NS_ENUM(uint8_t, XDeviceConnectionState) {
 /** 设备是否被绑定过*/
 @property (assign, nonatomic) uint8_t isBinded;
 
-/** 云端是否在线*/
+/** 云端是否在线,只代表云端记录的设备是否在线，不代表APP和设备建立了连接，建议设备的连接状态使用connectionState或者cloudConnectionState两个字段来表示*/
 @property (assign, nonatomic) BOOL isCloudOnline;
 
 /** 是否支持订阅码订阅*/
@@ -138,6 +138,16 @@ typedef NS_ENUM(uint8_t, XDeviceConnectionState) {
  返回CONNECTING时，正在尝试进行外网连接。
  */
 @property (assign, nonatomic) XDeviceConnectionState cloudConnectionState;
+
+/**
+ 网关设备id
+ */
+@property (assign, nonatomic) uint32_t gatewayId;
+
+/**
+ 是否是网关设备
+ */
+@property (assign, nonatomic) BOOL isGatewayDevice;
 
 /** 父设备*/
 @property (weak, nonatomic,nullable) XDevice *parentDevice;

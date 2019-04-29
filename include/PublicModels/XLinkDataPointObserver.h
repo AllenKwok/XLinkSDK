@@ -21,10 +21,10 @@ typedef void (^DataPointUpdateBlock)(XDevice *device, NSArray <XLinkDataPoint *>
 @property(strong, nonatomic, readonly) XDevice *device;
 
 ///要监听的dataPoint的index数组，不传或者传空数组默认监听所有的dataPoint
-@property(strong, nonatomic, readonly,nullable) NSArray *indexArray;
+@property(copy, nonatomic, readonly,nullable) NSArray *indexArray;
 
 ///监听到dataPoint变化的回调
-@property(strong, nonatomic, readonly) DataPointUpdateBlock block;
+@property(copy, nonatomic, readonly) DataPointUpdateBlock block;
 
 
 /**

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface XLinkSetDataPointTask : XLinkSendPolicyTask
 
 ///要设置的设备
-@property(weak, nonatomic) XDevice *device;
+@property(strong, nonatomic) XDevice *device;
 
 /**
  构建设置数据端点任务
@@ -29,6 +29,19 @@ NS_ASSUME_NONNULL_BEGIN
                                 dataPoints:(NSArray <XLinkDataPoint *> *)dataPoints
                                    timeout:(NSUInteger)timeout
                          completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+
+/**
+ 构建设置数据端点任务 并且启动
+ 
+ @param device 要设置数据端点的设备
+ @param timeout 设置超时时间，单位秒，建议10秒
+ @param completionHandler 任务完成后回调
+ @return XLinkSetDataPointTask
+ */
++ (instancetype)scheduledSetDataPointTaskWithDevice:(XDevice *)device
+                                         dataPoints:(NSArray <XLinkDataPoint *> *)dataPoints
+                                            timeout:(NSUInteger)timeout
+                            completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
 @end
 

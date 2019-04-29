@@ -74,6 +74,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeAllDeviceStateObserverWithDevice:(XDevice *)device;
 
 /**
+ 清除所有的设备状态监控
+ */
+- (void)clearDeviceStateObservers;
+
+/**
  获取SDK管理的设备实体
  
  @param macData 设备实体的mac地址

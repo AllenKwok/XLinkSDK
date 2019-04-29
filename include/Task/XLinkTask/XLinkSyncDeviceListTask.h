@@ -38,6 +38,20 @@ typedef void (^XLinkSyncDeviceListCompletionHandler)(NSArray <XDevice *> *device
                                  connectLocal:(BOOL)connectLocal
                                 completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
+/**
+ 同步设备列表 并启动
+ 
+ @param version 版本号(第一次获取需要传入0，才会返回所有的设备。)
+ @param timeout 超时时间
+ @param connectLocal 是否自动进行本地连接，默认 true
+ @param completionHandler 完成后的回调
+ @return XLinkSyncDeviceListTask
+ */
++ (instancetype)scheduledSyncDeviceListTaskWithVersion:(int)version
+                                               timeout:(NSUInteger)timeout
+                                          connectLocal:(BOOL)connectLocal
+                                     completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+
 @end
 
 

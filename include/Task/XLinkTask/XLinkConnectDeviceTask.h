@@ -41,6 +41,19 @@ typedef NS_ENUM(NSUInteger, XDeviceConnectionPolicy) {
                                     timeout:(NSUInteger)timeout
                               completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
+/**
+ 构建连接设备任务 并启动
+ 
+ @param device 要连接的设备
+ @param timeout 设置超时，单位毫秒，默认10秒
+ @param completionHandler 任务完成后回调
+ @return XLinkConnectDeviceTask
+ */
++ (instancetype)scheduledConnectDeviceTaskWithDevice:(XDevice *)device
+                           connectionPolicy:(XDeviceConnectionPolicy)connectionPolicy
+                                    timeout:(NSUInteger)timeout
+                          completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+
 
 @end
 

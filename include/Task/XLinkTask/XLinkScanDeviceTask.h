@@ -35,6 +35,20 @@ typedef void (^XLinkDidDiscoveredDeviceHandler)(XDevice *device);
                       didDiscoveredDeviceHandler:(XLinkDidDiscoveredDeviceHandler)discoveredDeviceHandler
                                completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
+/**
+ 构建扫描设备任务 并启动
+ 
+ @param pidArray productID数组
+ @param timeout 设置超时，单位毫秒，默认90秒
+ @param discoveredDeviceHandler 搜索到设备的回调
+ @param completionHandler 搜索完成的回调
+ @return XLinkScanDeviceTask
+ */
++ (instancetype)scheduledScanDeviceTaskWithProductIdArray:(NSArray *)pidArray
+                                                  timeout:(NSUInteger)timeout
+                               didDiscoveredDeviceHandler:(XLinkDidDiscoveredDeviceHandler)discoveredDeviceHandler
+                                        completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+
 
 @end
 

@@ -75,6 +75,38 @@ typedef NS_ENUM(NSUInteger, XLinkUserSourceType) {
                                                  timeout:(NSUInteger)timeout
                                        completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
+/**
+ 构建第三方用户登陆任务 并启动
+ 
+ @param userSourceType 用户来源
+ @param openid 第三方账号openid
+ @param accessToken 第三方账号授权凭证
+ @param nickName 第三方账号昵称
+ @param cropId 企业ID
+ @param completionHandler 完成回调
+ @return XLinkThirdPartyAuthorizeTask
+ */
++ (instancetype)scheduledThirdPartyUserAuthorizeTaskWithSource:(XLinkUserSourceType)userSourceType
+                                                        openId:(NSString *)openid
+                                                   accessToken:(NSString *)accessToken
+                                                      nickName:(NSString *)nickName
+                                                        cropId:(NSString *)cropId
+                                                       timeout:(NSUInteger)timeout
+                                             completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+
+/**
+ 构建外国的第三方用户（如Twitter，Facebook）登陆任务 并启动
+ 
+ @param content 第三方账号信息
+ @param cropId 企业ID
+ @param completionHandler 完成回调
+ @return XLinkThirdPartyAuthorizeTask
+ */
++ (instancetype)scheduledThirdForeignUserAuthorizeTaskWithContent:(NSDictionary *)content
+                                                           cropId:(NSString *)cropId
+                                                          timeout:(NSUInteger)timeout
+                                                completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+
 @end
 
 //以下是废弃的方法，不建议使用，不久的将来会删除

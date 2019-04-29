@@ -33,6 +33,18 @@ typedef void (^XLinkGetDataPointTaskCompletionHandler)(NSArray <XLinkDataPoint *
                                    timeout:(NSUInteger)timeout
                          completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
+/**
+ 构建获取数据端点的任务 并启动
+ 
+ @param device 设备
+ @param timeout 设置超时时间，单位秒，建议10秒
+ @param completionHandler 完成后的回调
+ @return XLinkGetDataPointTask
+ */
++ (instancetype)scheduledGetDataPointTaskWithDevice:(XDevice *)device
+                                            timeout:(NSUInteger)timeout
+                                  completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
+
 @end
 
 //以下是废弃的方法，不建议使用，不久的将来会删除
