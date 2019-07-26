@@ -7,7 +7,7 @@
 //
 
 #import "XLinkAuthorizeBaseTask.h"
-
+NS_ASSUME_NONNULL_BEGIN
 @interface XLinkSmsAuthorizeTask : XLinkAuthorizeBaseTask
 
 ///企业ID，默认值为nil。
@@ -54,3 +54,4 @@
                                  completionHandler:(XLinkTaskDidCompletionHandler)completionHandler;
 
 @end
+NS_ASSUME_NONNULL_END

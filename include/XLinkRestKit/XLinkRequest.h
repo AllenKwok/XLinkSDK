@@ -10,15 +10,20 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef enum : NSUInteger {
+
+typedef NS_ENUM(NSUInteger, XLinkHTTPMethodType) {
     XLinkHTTPMethodTypeGet,
     XLinkHTTPMethodTypePost,
     XLinkHTTPMethodTypeHead,
     XLinkHTTPMethodTypeDelete,
     XLinkHTTPMethodTypePut,
     XLinkHTTPMethodTypePatch
-} XLinkHTTPMethodType;
+};
 
+typedef NS_ENUM(NSUInteger, XLinkHTTPBodyType) {
+    XLinkHTTPBodyTypeJSON,
+    XLinkHTTPBodyTypeData
+};
 
 typedef void (^XLinkSuccessBlock)(id _Nullable responseObject);
 typedef void (^XLinkFailureBlock)(NSError * _Nullable error);
@@ -37,6 +42,9 @@ typedef void (^XLinkFinishedBlock)(id _Nullable responseObject, NSError * _Nulla
 
 ///请求的参数，如果使用`useGeneralHeaders`的话，这个属性设置的值会被忽略
 @property (nonatomic, strong, nullable) NSDictionary<NSString *, NSString *> *headers;
+
+///请求体类型
+@property (assign, nonatomic) XLinkHTTPBodyType httpBodyType;
 
 ///请求方法
 @property (nonatomic, assign) XLinkHTTPMethodType httpMethod;

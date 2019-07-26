@@ -35,6 +35,16 @@ typedef NS_ENUM(uint8_t, XDeviceConnectionState) {
 /** MAC地址*/
 @property (copy, nonatomic) NSData *macAddress;
 
+/**
+ 获得Mac地址的字符串形式，格式：00:00:11:aa:bb:cc
+ */
+@property (copy, nonatomic,getter = getMacAddressString) NSString *macAddressString;
+
+/**
+ 获得Mac地址的字符串形式,格式：000011AABBCC
+ */
+@property (copy, nonatomic,getter = getMacAddressSimple) NSString *macAddressSimple;
+
 /** 设备名称*/
 @property (copy, nonatomic) NSString *deviceName;
 
@@ -167,20 +177,6 @@ typedef NS_ENUM(uint8_t, XDeviceConnectionState) {
  *  @return 设备属性字典
  */
 - (NSDictionary *)getDictionaryFormat;
-
-/**
- *  获得Mac地址的字符串形式，
- *
- *  @return 格式：00:00:11:aa:bb:cc
- */
-- (NSString *)getMacAddressString;
-
-/**
- *  获得Mac地址的字符串形式
- *
- *  @return 格式：000011AABBCC
- */
-- (NSString *)getMacAddressSimple;
 
 /**
  比较两个设备是否是同一个设备
